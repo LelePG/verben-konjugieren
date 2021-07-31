@@ -3,13 +3,18 @@ const GermanVerbsDict = require('german-verbs-dict/dist/verbs');
 const express = require('express')
 
 const app = express()
-const port = 3030
+const port = 3045
+
 app.use(express.static(__dirname + '/../front'))
 
 const verben = ["hören", "gehen", "kochen"]
+const temposVerbais = ["PRASENS", "PRATERITUM",]// "FUTUR1", "FUTUR2", "PERFEKT", "PLUSQUAMPERFEKT",]
+  // "KONJUNKTIV1_PRASENS", "KONJUNKTIV1_FUTUR1", "KONJUNKTIV1_PERFEKT",
+  // "KONJUNKTIV2_PRATERITUM", "KONJUNKTIV2_FUTUR1", "KONJUNKTIV2_FUTUR2"]
 
-const verboRandom =function(){
-    let indice = Math.floor(Math.random() * verben.length)
+const indiceRandom =function(array){
+    let indice = Math.floor(Math.random() * array.length)
+    console.log(indice)
     return indice
 }
 
@@ -27,18 +32,13 @@ const conjugacoesTempo = function(tempoVerbal, verbo){
 }
 
 app.get('/resposta', (req, res) => {
-    let verboAtual = verben[verboRandom()]
-    let tempo1 = conjugacoesTempo("PRASENS", verboAtual)
-    console.log(tempo1)
+    let verboAtual = verben[indiceRandom(verben)]
+    let tempoAtual = temposVerbais[indiceRandom(temposVerbais)]
+    let tempo1 = conjugacoesTempo(tempoAtual, verboAtual)
+    console.log(tempo1 )
   res.json(tempo1)
 })
 
 app.listen(port, () => {
   console.log(`Acesse http://localhost:${port}`)
 })
-
-// // hörten
-// console.log(GermanVerbsLib.getConjugation(GermanVerbsDict, 'hören', 'PRATERITUM', 1, 'P'));
-
-// // werden gehabt haben
-// console.log(GermanVerbsLib.getConjugation(GermanVerbsDict, 'haben', 'FUTUR2', 3, 'P', 'HABEN'));
