@@ -1,8 +1,10 @@
 <template>
-  <v-card color="#FFE8D6">
-    <p id="instrucao">Selecione os tempos verbais que você quer praticar:</p>
+  <v-card color="#FFE8D6" class="pa-2">
+    <p id="instrucao">
+      Selecione os tempos verbais que você quer praticar e clique em iniciar!
+    </p>
     <v-container>
-      <v-row justify="center">
+      <v-row justify="space-around">
         <v-col md="4">
           <h2 class="tituloTempos">Indicativ</h2>
           <v-checkbox
@@ -99,6 +101,9 @@
           </v-checkbox>
         </v-col>
       </v-row>
+      <v-card-actions>
+        <v-btn elevation="12" color="#B7B7A4" block>Iniciar </v-btn>
+      </v-card-actions>
     </v-container>
   </v-card>
 </template>
