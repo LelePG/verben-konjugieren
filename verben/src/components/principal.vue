@@ -18,6 +18,9 @@ export default {
             verbo:"brauchen",
             tempos:["PRASENS","PRATERITUM"]
         }
+    },
+    created: function () {
+        
     }
 }
 </script>
