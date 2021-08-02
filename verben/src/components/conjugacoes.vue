@@ -75,7 +75,7 @@ export default {
         }
     },
     created: function(){
-         this.resposta.ich = GermanVerbsLib.getConjugation(GermanVerbsDict, this.verbo, this.tempoVerbal, 1, 'S')[0],
+        this.resposta.ich = GermanVerbsLib.getConjugation(GermanVerbsDict, this.verbo, this.tempoVerbal, 1, 'S')[0],
         this.resposta.du = GermanVerbsLib.getConjugation(GermanVerbsDict, this.verbo, this.tempoVerbal, 2, 'S')[0],
         this.resposta.er = GermanVerbsLib.getConjugation(GermanVerbsDict, this.verbo, this.tempoVerbal, 3, 'S')[0],
         this.resposta.es = GermanVerbsLib.getConjugation(GermanVerbsDict, this.verbo, this.tempoVerbal, 3, 'S')[0],
@@ -87,8 +87,17 @@ export default {
     },
     methods:{
         verificaResposta: function(){
-            console.log(this.entradasUsuario.equals(this.respostas))
-
+           let conjugacoes = Object.entries(this.entradasUsuario) //retorna um array
+           const elementoAtual = this.$el
+            for (let conjugacaoEntry of conjugacoes ){
+                let inputRespectivo = elementoAtual.querySelector(`[name=${conjugacaoEntry[0]}]`)
+                if(conjugacaoEntry[1] === this.resposta[conjugacaoEntry[0]]){
+                    inputRespectivo.classList.add("certo")
+                }
+                else{
+                    inputRespectivo.classList.add("errado")
+                }
+            }
         }
     }
 }
@@ -114,6 +123,14 @@ ul#tentantivasUsuario {
 ul#tentantivasUsuario li {
   display: flex;
   justify-content: space-between;
+}
+
+.certo{
+    background-color: rgba(14, 250, 14, 0.555);
+}
+
+.errado{
+    background-color: rgba(228, 59, 59, 0.808);
 }
 </style>
 
