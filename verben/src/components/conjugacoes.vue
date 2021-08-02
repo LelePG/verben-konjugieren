@@ -135,6 +135,7 @@ ul#tentantivasUsuario {
 ul#tentantivasUsuario li {
   display: flex;
   justify-content: space-between;
+  margin : 3px;
 }
 
 .certo{
