@@ -1,10 +1,10 @@
 <template>
   <v-card color="#FFE8D6" class="pa-2">
   <h1 id="verboAtual">O verbo é {{verbo}}</h1>
-  <v-row fill-width justify="">
-  <Conjugacoes v-for="tempo in tempos" :key="tempo" :tempoVerbal="tempo"/>
+  <v-row fill-width>
+  <Conjugacoes v-for="tempo in tempos" :key="tempo" :tempoVerbal="tempo" :verbo="verbo" />
   </v-row>
-  </v-card>    
+  </v-card>
 </template>
 
 <script>
