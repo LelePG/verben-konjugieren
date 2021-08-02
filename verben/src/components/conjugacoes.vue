@@ -48,7 +48,8 @@
       </li>
     </ul>
     <v-btn color="#B7B7A4" block @click="verificaResposta"> Verificar </v-btn>
-    {{ entradasUsuario }}
+    {{ resposta}}
+    {{pontos}}
   </div>
 </template>
 
@@ -71,7 +72,8 @@ export default {
             sieP: "", 
             Sie:"",
         },
-        resposta:{}
+        resposta:{},
+        pontos: 0
         }
     },
     created: function(){
@@ -91,7 +93,17 @@ export default {
            const elementoAtual = this.$el
             for (let conjugacaoEntry of conjugacoes ){
                 let inputRespectivo = elementoAtual.querySelector(`[name=${conjugacaoEntry[0]}]`)
-                if(conjugacaoEntry[1] === this.resposta[conjugacaoEntry[0]]){
+
+                if(inputRespectivo.classList.contains("certo")){
+                    continue
+                }
+                else if(conjugacaoEntry[1] === this.resposta[conjugacaoEntry[0]]){
+                    if(inputRespectivo.classList.contains("errado")){
+                        inputRespectivo.classList.remove("errado")
+                        this.pontos+=5
+                    } else {
+                        this.pontos +=10
+                    }
                     inputRespectivo.classList.add("certo")
                 }
                 else{
