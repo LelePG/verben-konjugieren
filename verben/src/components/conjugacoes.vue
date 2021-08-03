@@ -121,12 +121,14 @@ export default {
 
 <style>
 div.conjugacoes {
-  margin: 15px;
+  margin: 25px;
   width: 200px;
 }
 h3#tempoVerbal {
   text-align: center;
+  color: #4c4f40
 }
+
 input[type="text"] {
   border: 2px solid #6b705c;
   border-radius: 5px;

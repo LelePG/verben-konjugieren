@@ -12,9 +12,10 @@
     <button class = "btn-especial" @click="insereCaracter('ö')" >ö</button>
     <button class = "btn-especial" @click="insereCaracter('Ü')" >Ü</button>
     <button class = "btn-especial" @click="insereCaracter('ü')" >ü</button>
-  </div>
+    <br/>
+  <v-btn color = "#B7B7A4" >Gerar novo verbo</v-btn>
 
-     <!-- Ä/ä  Ö/ö  Ü/ü  -->
+  </div>
   </v-card>
 </template>
 
@@ -57,11 +58,13 @@ h1#verboAtual{
 button.btn-especial{
   height: 25px;
   width: 35px;
-  margin: 10px;
+  margin: 15px 10px;
   background-color: #B7B7A4;
+  border-radius: 5px;
 }
 
 div#botoesEspecias{
   text-align: center;
+  padding-bottom:15px;
 }
 </style>
