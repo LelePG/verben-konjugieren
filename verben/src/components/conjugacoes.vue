@@ -77,6 +77,7 @@ export default {
         }
     },
     created: function(){
+      try{
         this.resposta.ich = GermanVerbsLib.getConjugation(GermanVerbsDict, this.verbo, this.tempoVerbal, 1, 'S')[0],
         this.resposta.du = GermanVerbsLib.getConjugation(GermanVerbsDict, this.verbo, this.tempoVerbal, 2, 'S')[0],
         this.resposta.er = GermanVerbsLib.getConjugation(GermanVerbsDict, this.verbo, this.tempoVerbal, 3, 'S')[0],
@@ -86,6 +87,9 @@ export default {
         this.resposta.ihr = GermanVerbsLib.getConjugation(GermanVerbsDict, this.verbo, this.tempoVerbal, 2, 'P')[0],
         this.resposta.sieP= GermanVerbsLib.getConjugation(GermanVerbsDict, this.verbo, this.tempoVerbal, 3, 'P')[0], 
         this.resposta.Sie= GermanVerbsLib.getConjugation(GermanVerbsDict, this.verbo, this.tempoVerbal, 3, 'P')[0]
+      } catch(e){
+        document.location.reload(true);
+      }
     },
     methods:{
         verificaResposta: function(){

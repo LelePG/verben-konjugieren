@@ -19,7 +19,6 @@ liegen : estar deitado
 heißen : chamar-se 
 denken : pensar 
 nehmen : tomar, pegar
-tun : fazer
 dürfen : poder, dever
 glauben : acreditar
 halten : segurar, parar
