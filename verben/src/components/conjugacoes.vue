@@ -97,7 +97,7 @@ export default {
                 if(inputRespectivo.classList.contains("certo")){
                     continue
                 }
-                else if(conjugacaoEntry[1] === this.resposta[conjugacaoEntry[0]]){
+                else if(conjugacaoEntry[1].toLowerCase().trim() === this.resposta[conjugacaoEntry[0]].toLowerCase().trim()){
                     if(inputRespectivo.classList.contains("errado")){
                         inputRespectivo.classList.remove("errado")
                         this.pontos+=5
