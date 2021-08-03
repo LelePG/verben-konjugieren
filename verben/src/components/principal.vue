@@ -4,6 +4,17 @@
   <v-row fill-width>
   <Conjugacoes v-for="tempo in tempos" :key="tempo" :tempoVerbal="tempo" :verbo="verbo" />
   </v-row>
+  <div id = "botoesEspecias">
+    <button class = "btn-especial" @click="insereCaracter('ß')" >ß</button>
+    <button class = "btn-especial" @click="insereCaracter('Ä')" >Ä</button>
+    <button class = "btn-especial" text @click="insereCaracter('ä')" >ä</button>
+    <button class = "btn-especial" @click="insereCaracter('Ö')" >Ö</button>
+    <button class = "btn-especial" @click="insereCaracter('ö')" >ö</button>
+    <button class = "btn-especial" @click="insereCaracter('Ü')" >Ü</button>
+    <button class = "btn-especial" @click="insereCaracter('ü')" >ü</button>
+  </div>
+
+     <!-- Ä/ä  Ö/ö  Ü/ü  -->
   </v-card>
 </template>
 
@@ -28,6 +39,11 @@ export default {
         const verboEtraducao = texto[indiceAleatorio].split(":")
         this.verbo = verboEtraducao[0].trim()
         this.traducao = verboEtraducao[1].trim()
+    }, 
+    methods :{
+      insereCaracter: function(caracter){
+        console.log(caracter)
+      }
     }
 }
 </script>
@@ -36,5 +52,16 @@ export default {
 h1#verboAtual{   
   text-align: center;
   color: #4c4f40;
+}
+
+button.btn-especial{
+  height: 25px;
+  width: 35px;
+  margin: 10px;
+  background-color: #B7B7A4;
+}
+
+div#botoesEspecias{
+  text-align: center;
 }
 </style>
