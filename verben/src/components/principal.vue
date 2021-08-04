@@ -8,7 +8,7 @@
   <div id = "botoesEspecias">
     <button class = "btn-especial" @click="insereCaracter('ß')" >ß</button>
     <button class = "btn-especial" @click="insereCaracter('Ä')" >Ä</button>
-    <button class = "btn-especial" text @click="insereCaracter('ä')" >ä</button>
+    <button class = "btn-especial" @click="insereCaracter('ä')" >ä</button>
     <button class = "btn-especial" @click="insereCaracter('Ö')" >Ö</button>
     <button class = "btn-especial" @click="insereCaracter('ö')" >ö</button>
     <button class = "btn-especial" @click="insereCaracter('Ü')" >Ü</button>
@@ -49,7 +49,8 @@ export default {
     }, 
     methods :{
       insereCaracter: function(caracter){
-        console.log(caracter)
+        const inputFocado = this.getInputFocus
+        inputFocado.value += caracter
       }
     }
 }

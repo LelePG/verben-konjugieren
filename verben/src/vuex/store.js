@@ -21,8 +21,6 @@ export default new Vuex.Store({
      state.inputFocus = input
     },
     setPontos: function(state, pontos){
-      console.log("uhu")
-      console.log(pontos)
       state.pontos += pontos
     }
 

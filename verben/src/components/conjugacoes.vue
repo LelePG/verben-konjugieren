@@ -4,47 +4,47 @@
     <ul id="tentantivasUsuario">
       <li>
         <span class="pessoa">ich</span>
-        <input type="text" name="ich" v-model="entradasUsuario.ich" />
+        <input type="text" name="ich" @focus="alteraInputFocus"  v-model="entradasUsuario.ich" />
       </li>
 
       <li>
         <span class="pessoa">du</span>
-        <input type="text" name="du" v-model="entradasUsuario.du" />
+        <input type="text" name="du" @focus="alteraInputFocus" v-model="entradasUsuario.du" />
       </li>
 
       <li>
         <span class="pessoa">er</span>
-        <input type="text" name="er" v-model="entradasUsuario.er" />
+        <input type="text" name="er" @focus="alteraInputFocus" v-model="entradasUsuario.er" />
       </li>
 
       <li>
         <span class="pessoa">sie</span>
-        <input type="text" name="sieS" v-model="entradasUsuario.sieS" />
+        <input type="text" name="sieS" @focus="alteraInputFocus" v-model="entradasUsuario.sieS" />
       </li>
 
       <li>
         <span class="pessoa">es</span>
-        <input type="text" name="es" v-model="entradasUsuario.es" />
+        <input type="text" name="es" @focus="alteraInputFocus" v-model="entradasUsuario.es" />
       </li>
 
       <li>
         <span class="pessoa">wir</span>
-        <input type="text" name="wir" v-model="entradasUsuario.wir" />
+        <input type="text" name="wir" @focus="alteraInputFocus" v-model="entradasUsuario.wir" />
       </li>
 
       <li>
         <span class="pessoa">ihr</span>
-        <input type="text" name="ihr" v-model="entradasUsuario.ihr" />
+        <input type="text" name="ihr" @focus="alteraInputFocus" v-model="entradasUsuario.ihr" />
       </li>
 
       <li>
         <span class="pessoa">sie</span>
-        <input type="text" name="sieP" v-model="entradasUsuario.sieP" />
+        <input type="text" name="sieP" @focus="alteraInputFocus" v-model="entradasUsuario.sieP" />
       </li>
 
       <li>
         <span class="pessoa">Sie</span>
-        <input type="text" name="Sie" v-model="entradasUsuario.Sie" />
+        <input type="text" name="Sie" @focus="alteraInputFocus" v-model="entradasUsuario.Sie" />
       </li>
     </ul>
     <v-btn color="#B7B7A4" block @click="verificaResposta"> Verificar </v-btn>
@@ -93,6 +93,10 @@ export default {
     },
     methods:{
       ...mapMutations(['setInputFocus', 'setPontos']),
+        alteraInputFocus:function(){
+          const inputFocado = this.$el.querySelector(`input[type="text"]:focus`)
+          this.$store.commit('setInputFocus',inputFocado)
+        },
         verificaResposta: function(){
            let conjugacoes = Object.entries(this.entradasUsuario) //retorna um array
            const elementoAtual = this.$el
