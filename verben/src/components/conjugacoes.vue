@@ -4,7 +4,8 @@
     <h3 id="tempoVerbal">{{ tempoVerbal }}</h3>
     <i class="far fa-lightbulb" @click="escondeResposta = false"></i>
     </div>
-    <ul id="tentantivasUsuario" v-if="escondeResposta">
+    <div v-if="escondeResposta">
+    <ul id="tentantivasUsuario" >
       <li>
         <span class="pessoa">ich</span>
         <input
@@ -95,12 +96,15 @@
         />
       </li>
     </ul>
+    <v-btn color="#B7B7A4" block @click="verificaResposta"> Verificar </v-btn>
+    </div>
+
     <v-card v-else @click="escondeResposta = true">
-      <p>AAAAA</p>
+      <p class = "respostasMostradas" v-for="pessoa in Object.entries(this.resposta)" :key=pessoa[0]>
+        {{pessoa[0]}} - {{pessoa[1]}} 
+      </p>
     </v-card>
 
-    <v-btn color="#B7B7A4" block @click="verificaResposta"> Verificar </v-btn>
-    {{ resposta }}
   </div>
 </template>
 
