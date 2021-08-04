@@ -49,13 +49,13 @@
     </ul>
     <v-btn color="#B7B7A4" block @click="verificaResposta"> Verificar </v-btn>
     {{ resposta}}
-    {{pontos}}
   </div>
 </template>
 
 <script>
 const GermanVerbsLib = require('german-verbs');
 const GermanVerbsDict = require('german-verbs-dict/dist/verbs');
+import { mapMutations } from 'vuex'
 
 export default {
     props:["tempoVerbal", "verbo"],
@@ -92,6 +92,7 @@ export default {
       }
     },
     methods:{
+      ...mapMutations(['setInputFocus', 'setPontos']),
         verificaResposta: function(){
            let conjugacoes = Object.entries(this.entradasUsuario) //retorna um array
            const elementoAtual = this.$el
@@ -103,11 +104,12 @@ export default {
                 else if(conjugacaoEntry[1].toLowerCase().trim() === this.resposta[conjugacaoEntry[0]].toLowerCase().trim()){
                     if(inputRespectivo.classList.contains("errado")){
                         inputRespectivo.classList.remove("errado")
-                        this.pontos+=5
+                        this.$store.commit("setPontos", 5)
                     } else {
-                        this.pontos +=10
+                        this.$store.commit("setPontos", 10)
                     }
                     inputRespectivo.classList.add("certo")
+      
                 }
                 else{
                     inputRespectivo.classList.add("errado")
@@ -134,9 +136,6 @@ input[type="text"] {
   width: 140px;
 }
 
-input[type="text"]:focus {
- background-color:black
-}
 
 ul#tentantivasUsuario {
   list-style-type: none;

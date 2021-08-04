@@ -9,19 +9,21 @@ export default new Vuex.Store({
     pontos : 0
   },
   getters:{
-    getInputFocus(){
-      return this.$store.inputFocus
+    getInputFocus: function(state){
+      return state.inputFocus
     },
-    getPontos(){
-      return this.$store.pontos
+    getPontos: function(state){
+      return state.pontos
     }
   },
   mutations: {
-    setInputFocus(state, input) {
-     state.$store.input = input
+    setInputFocus: function(state, input) {
+     state.inputFocus = input
     },
-    setPontos(state, pontos){
-      state.$store.pontos += pontos
+    setPontos: function(state, pontos){
+      console.log("uhu")
+      console.log(pontos)
+      state.pontos += pontos
     }
 
   }

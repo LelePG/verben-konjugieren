@@ -1,6 +1,7 @@
 <template>
   <v-card color="#FFE8D6" class="pa-2">
   <h1 id="verboAtual">O verbo é {{verbo}} - {{traducao}}</h1>
+  <h2 id="pontuacao">Pontos: {{getPontos}}</h2>
   <v-row fill-width>
   <Conjugacoes v-for="tempo in tempos" :key="tempo" :tempoVerbal="tempo" :verbo="verbo" />
   </v-row>
@@ -22,9 +23,14 @@
 <script>
 import Conjugacoes from "./conjugacoes.vue"
 import file from 'raw-loader!../assets/listaVerbos1.txt'
+import {mapGetters} from 'vuex'
+
 export default {
     components:{
         Conjugacoes,
+    },
+    computed:{
+      ...mapGetters(["getInputFocus", "getPontos"])
     },
     data: function(){
         return{
@@ -50,7 +56,7 @@ export default {
 </script>
 
 <style>
-h1#verboAtual{   
+h1#verboAtual, h2#pontuacao{   
   text-align: center;
   color: #4c4f40;
 }
