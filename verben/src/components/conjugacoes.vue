@@ -99,11 +99,11 @@
     <v-btn color="#B7B7A4" block @click="verificaResposta"> Verificar </v-btn>
     </div>
 
-    <v-card v-else @click="escondeResposta = true">
+    <div v-else @click="escondeResposta = true">
       <p class = "respostasMostradas" v-for="pessoa in Object.entries(this.resposta)" :key=pessoa[0]>
         {{pessoa[0]}} - {{pessoa[1]}} 
       </p>
-    </v-card>
+    </div>
 
   </div>
 </template>
@@ -185,8 +185,12 @@ export default {
 
 <style>
 div.conjugacoes {
-  margin: 25px;
-  width: 180px;
+  margin-left: 25px;
+  padding: 15px;
+  width: 210px;
+  border: 4px solid #6b705c;
+  box-shadow: 2px 2px #030303b0;
+  border-radius: 10px;
 }
 
 div.titulo{

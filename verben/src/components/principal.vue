@@ -2,7 +2,7 @@
   <v-card color="#FFE8D6" class="pa-2">
   <h1 id="verboAtual">O verbo é {{verbo}} - {{traducao}}</h1>
   <h2 id="pontuacao">Pontos: {{getPontos}}</h2>
-  <v-row fill-width>
+  <v-row >
   <Conjugacoes v-for="tempo in tempos" :key="tempo" :tempoVerbal="tempo" :verbo="verbo" />
   </v-row>
   <div id = "botoesEspecias">
