@@ -13,5 +13,5 @@ Jogo de conjugação de verbos em alemão
 - adicionar um emoji de certo e errado nas classes do verificar
 - adicionar uma bordinha no componente conjugacoes 
 - adicionar botão de ver resposta no componente conjugações
-
+✔️ ❌
 https://coolors.co/cb997e-ddbea9-ffe8d6-b7b7a4-a5a58d-6b705c

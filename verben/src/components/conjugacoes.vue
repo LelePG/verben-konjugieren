@@ -97,7 +97,6 @@ export default {
            const elementoAtual = this.$el
             for (let conjugacaoEntry of conjugacoes ){
                 let inputRespectivo = elementoAtual.querySelector(`[name=${conjugacaoEntry[0]}]`)
-
                 if(inputRespectivo.classList.contains("certo")){
                     continue
                 }
@@ -122,7 +121,7 @@ export default {
 <style>
 div.conjugacoes {
   margin: 25px;
-  width: 200px;
+  width: 180px;
 }
 h3#tempoVerbal {
   text-align: center;
@@ -132,7 +131,13 @@ h3#tempoVerbal {
 input[type="text"] {
   border: 2px solid #6b705c;
   border-radius: 5px;
+  width: 140px;
 }
+
+input[type="text"]:focus {
+ background-color:black
+}
+
 ul#tentantivasUsuario {
   list-style-type: none;
   margin-bottom: 10px;
@@ -144,6 +149,10 @@ ul#tentantivasUsuario li {
   margin : 3px;
 }
 
+ul#tentantivasUsuario li span{
+  width:30px;
+}
+
 .certo{
     background-color: rgba(14, 250, 14, 0.555);
 }
@@ -151,5 +160,6 @@ ul#tentantivasUsuario li {
 .errado{
     background-color: rgba(228, 59, 59, 0.808);
 }
+
 </style>
 
