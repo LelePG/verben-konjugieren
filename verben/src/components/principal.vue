@@ -51,6 +51,7 @@ export default {
       insereCaracter: function(caracter){
         const inputFocado = this.getInputFocus
         inputFocado.value += caracter
+        inputFocado.focus()
       }
     }
 }
