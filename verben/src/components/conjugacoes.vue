@@ -1,8 +1,10 @@
 <template>
   <div class="conjugacoes">
+    <div class = "titulo">
     <h3 id="tempoVerbal">{{ tempoVerbal }}</h3>
-    <i class="far fa-lightbulb" @click="mostraResposta"></i>
-    <ul id="tentantivasUsuario">
+    <i class="far fa-lightbulb" @click="escondeResposta = false"></i>
+    </div>
+    <ul id="tentantivasUsuario" v-if="escondeResposta">
       <li>
         <span class="pessoa">ich</span>
         <input
@@ -93,6 +95,10 @@
         />
       </li>
     </ul>
+    <v-card v-else @click="escondeResposta = true">
+      <p>AAAAA</p>
+    </v-card>
+
     <v-btn color="#B7B7A4" block @click="verificaResposta"> Verificar </v-btn>
     {{ resposta }}
   </div>
@@ -120,6 +126,7 @@ export default {
       },
       resposta: {},
       pontos: 0,
+      escondeResposta: true,
     };
   },
   created: function () {
@@ -168,9 +175,6 @@ export default {
         }
       }
     },
-    mostraResposta: function () {
-      console.log("oi");
-    },
   },
 };
 </script>
@@ -180,9 +184,18 @@ div.conjugacoes {
   margin: 25px;
   width: 180px;
 }
-h3#tempoVerbal {
-  text-align: center;
+
+div.titulo{
   color: #4c4f40;
+}
+
+h3#tempoVerbal{
+  display: inline;
+  text-align: center;
+}
+div.titulo i{
+ float:right;
+ text-align: left;
 }
 
 input[type="text"] {
