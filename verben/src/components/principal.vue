@@ -2,9 +2,11 @@
   <v-card color="#FFE8D6" class="pa-2">
   <h1 id="verboAtual">O verbo é {{verbo}} - {{traducao}}</h1>
   <h2 id="pontuacao">Pontos: {{getPontos}}</h2>
+  <v-container>
   <v-row >
   <Conjugacoes v-for="tempo in tempos" :key="tempo" :tempoVerbal="tempo" :verbo="verbo" />
   </v-row>
+  </v-container>
   <div id = "botoesEspecias">
     <button class = "btn-especial" @click="insereCaracter('ß')" >ß</button>
     <button class = "btn-especial" @click="insereCaracter('Ä')" >Ä</button>

@@ -2,7 +2,7 @@
   <div class="conjugacoes">
     <div class = "titulo">
     <h3 id="tempoVerbal">{{ tempoVerbal }}</h3>
-    <i class="far fa-lightbulb" @click="escondeResposta = false"></i>
+    <i class="far fa-lightbulb" @click="verResposta"></i>
     </div>
     <div v-if="escondeResposta">
     <ul id="tentantivasUsuario" >
@@ -99,10 +99,12 @@
     <v-btn color="#B7B7A4" block @click="verificaResposta"> Verificar </v-btn>
     </div>
 
-    <div v-else @click="escondeResposta = true">
-      <p class = "respostasMostradas" v-for="pessoa in Object.entries(this.resposta)" :key=pessoa[0]>
+    <div v-else>
+      <p class = "respostasMostrar" v-for="pessoa in Object.entries(this.resposta)" :key=pessoa[0]>
         {{pessoa[0]}} - {{pessoa[1]}} 
       </p>
+    <v-btn color="#B7B7A4" block @click="escondeResposta = true"> Voltar </v-btn>
+
     </div>
 
   </div>
@@ -153,6 +155,11 @@ export default {
     alteraInputFocus: function () {
       const inputFocado = this.$el.querySelector(`input[type="text"]:focus`);
       this.$store.commit("setInputFocus", inputFocado);
+    },
+    verResposta:function(){
+      this.escondeResposta = false
+      this.$store.commit("setPontos", -55);
+
     },
     verificaResposta: function () {
       let conjugacoes = Object.entries(this.entradasUsuario); //retorna um array
@@ -220,11 +227,18 @@ ul#tentantivasUsuario {
 ul#tentantivasUsuario li {
   display: flex;
   justify-content: space-between;
-  margin: 3px;
+  margin: 4px;
 }
 
 ul#tentantivasUsuario li span {
   width: 30px;
+}
+
+p.respostasMostrar{
+  color:#6b705c;
+  text-align: center;
+  margin-top: 8px;
+  margin-bottom: 7px;
 }
 
 .certo {
