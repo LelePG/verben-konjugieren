@@ -5,17 +5,18 @@
     <h1 id = "titulo">Verben Konjugieren</h1>
     </v-app-bar>
     <br/>
-   <Principal/>
+   <router-view/>
   </main>
 </template>
 
 <script>
 //import Config from './components/config.vue';
-import Principal from "./components/principal.vue"
+//import Principal from "./components/principal.vue"
 export default {
   name: 'App',
   components: {
-    Principal
+    //Principal
+   // Config
   },
 
   data: () => ({

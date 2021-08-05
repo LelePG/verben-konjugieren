@@ -16,7 +16,10 @@
     <button class = "btn-especial" @click="insereCaracter('Ü')" >Ü</button>
     <button class = "btn-especial" @click="insereCaracter('ü')" >ü</button>
     <br/>
-  <v-btn color = "#B7B7A4" >Gerar novo verbo</v-btn>
+
+  <router-link to ="/">
+  <v-btn color = "#B7B7A4">Reiniciar</v-btn>
+  </router-link>
 
   </div>
   </v-card>
@@ -77,4 +80,5 @@ div#botoesEspecias{
   text-align: center;
   padding-bottom:15px;
 }
+
 </style>

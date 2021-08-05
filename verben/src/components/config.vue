@@ -101,9 +101,9 @@
           </v-checkbox>
         </v-col>
       </v-row>
-      <v-card-actions>
-        <v-btn elevation="12" color="#B7B7A4" block>Iniciar </v-btn>
-      </v-card-actions>
+        <router-link to ="/jogar">
+          <v-btn elevation="12" color="#B7B7A4" block>Iniciar </v-btn>
+        </router-link>
     </v-container>
   </v-card>
 </template>
