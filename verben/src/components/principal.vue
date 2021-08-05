@@ -35,22 +35,23 @@ export default {
         Conjugacoes,
     },
     computed:{
-      ...mapGetters(["getInputFocus", "getPontos"])
+      ...mapGetters(["getInputFocus", "getPontos", "getTemposVerbais"])
     },
     data: function(){
         return{
             verbo:"brauchen",
             traducao: "procurar",
-            tempos:["PRASENS","PRATERITUM"]
+            tempos:[]
         }
     },
     created: function () {
         const texto = file.toString().split("\n")
         const indiceAleatorio = Math.trunc(Math.random() * texto.length);
-        console.log(indiceAleatorio)
         const verboEtraducao = texto[indiceAleatorio].split(":")
         this.verbo = verboEtraducao[0].trim()
         this.traducao = verboEtraducao[1].trim()
+
+        this.tempos = this.getTemposVerbais
     }, 
     methods :{
       insereCaracter: function(caracter){

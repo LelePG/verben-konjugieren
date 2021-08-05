@@ -6,7 +6,8 @@ Vue.use(Vuex)
 export default new Vuex.Store({
   state: {
     inputFocus: "",
-    pontos : 0
+    pontos : 0,
+    temposVerbais: ["PRASENS"]
   },
   getters:{
     getInputFocus: function(state){
@@ -14,6 +15,9 @@ export default new Vuex.Store({
     },
     getPontos: function(state){
       return state.pontos
+    },
+    getTemposVerbais: function(state){
+      return state.temposVerbais
     }
   },
   mutations: {

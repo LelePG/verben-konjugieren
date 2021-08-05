@@ -2,7 +2,7 @@
   <div class="conjugacoes">
     <div class = "titulo">
     <h3 id="tempoVerbal">{{ tempoVerbal }}</h3>
-    <i class="far fa-lightbulb" @click="escondeResposta = false"></i>
+    <i class="far fa-lightbulb" @click="escondeResposta = !escondeResposta"></i>
     </div>
     <div v-if="escondeResposta">
     <ul id="tentantivasUsuario" >
