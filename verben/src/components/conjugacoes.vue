@@ -2,7 +2,7 @@
   <div class="conjugacoes">
     <div class = "titulo">
     <h3 id="tempoVerbal">{{ tempoVerbal }}</h3>
-    <i class="far fa-lightbulb" @click="verResposta"></i>
+    <i class="far fa-lightbulb" @click="escondeResposta = false"></i>
     </div>
     <div v-if="escondeResposta">
     <ul id="tentantivasUsuario" >
@@ -13,6 +13,7 @@
           name="ich"
           @focus="alteraInputFocus"
           v-model="entradasUsuario.ich"
+          :class = "classesInput.ich"
         />
       </li>
 
@@ -23,6 +24,7 @@
           name="du"
           @focus="alteraInputFocus"
           v-model="entradasUsuario.du"
+          :class = "classesInput.du"
         />
       </li>
 
@@ -33,6 +35,7 @@
           name="er"
           @focus="alteraInputFocus"
           v-model="entradasUsuario.er"
+          :class = "classesInput.er"
         />
       </li>
 
@@ -43,6 +46,7 @@
           name="sieS"
           @focus="alteraInputFocus"
           v-model="entradasUsuario.sieS"
+          :class = "classesInput.sieS"
         />
       </li>
 
@@ -53,6 +57,7 @@
           name="es"
           @focus="alteraInputFocus"
           v-model="entradasUsuario.es"
+          :class = "classesInput.es"
         />
       </li>
 
@@ -63,6 +68,7 @@
           name="wir"
           @focus="alteraInputFocus"
           v-model="entradasUsuario.wir"
+          :class = "classesInput.wir"
         />
       </li>
 
@@ -73,6 +79,7 @@
           name="ihr"
           @focus="alteraInputFocus"
           v-model="entradasUsuario.ihr"
+          :class = "classesInput.ihr"
         />
       </li>
 
@@ -83,6 +90,7 @@
           name="sieP"
           @focus="alteraInputFocus"
           v-model="entradasUsuario.sieP"
+          :class = "classesInput.sieP"
         />
       </li>
 
@@ -93,6 +101,7 @@
           name="Sie"
           @focus="alteraInputFocus"
           v-model="entradasUsuario.Sie"
+          :class = "classesInput.Sie"
         />
       </li>
     </ul>
@@ -130,6 +139,17 @@ export default {
         sieP: "",
         Sie: "",
       },
+      classesInput: {
+        ich: "",
+        du: "",
+        er: "",
+        es: "",
+        sieS: "",
+        wir: "",
+        ihr: "",
+        sieP: "",
+        Sie: "",
+      },
       resposta: {},
       pontos: 0,
       escondeResposta: true,
@@ -156,38 +176,31 @@ export default {
       const inputFocado = this.$el.querySelector(`input[type="text"]:focus`);
       this.$store.commit("setInputFocus", inputFocado);
     },
-    verResposta:function(){
-      this.escondeResposta = false
-      this.$store.commit("setPontos", -55);
-
+    respostaJaTaCerta: function(nameDoInput){
+      return this.classesInput[nameDoInput] === "certo"
+    },
+    respostaCerta: function(resposta, pessoa){
+      return resposta.toLowerCase().trim() === this.resposta[pessoa].toLowerCase().trim()
     },
     verificaResposta: function () {
       let conjugacoes = Object.entries(this.entradasUsuario); //retorna um array
-      const elementoAtual = this.$el;
-      for (let conjugacaoEntry of conjugacoes) {
-        let inputRespectivo = elementoAtual.querySelector(
-          `[name=${conjugacaoEntry[0]}]`
-        );
-        if (inputRespectivo.classList.contains("certo")) {
+      for (let [pessoa,resposta] of conjugacoes) {
+        console.log(pessoa)
+        if(this.respostaJaTaCerta(pessoa)){
           continue;
-        } else if (
-          conjugacaoEntry[1].toLowerCase().trim() ===
-          this.resposta[conjugacaoEntry[0]].toLowerCase().trim()
-        ) {
-          if (inputRespectivo.classList.contains("errado")) {
-            inputRespectivo.classList.remove("errado");
-            this.$store.commit("setPontos", 5);
-          } else {
-            this.$store.commit("setPontos", 10);
-          }
-          inputRespectivo.classList.add("certo");
-        } else {
-          inputRespectivo.classList.add("errado");
         }
+       
+       if(this.respostaCerta(resposta, pessoa)){
+         const pontosDaResposta =  this.classesInput[pessoa]? 5 : 10
+         this.classesInput[pessoa]="certo"
+         this.$store.commit("setPontos", pontosDaResposta);
+       } else{
+         this.classesInput[pessoa]= "errado"
+       }
       }
-    },
-  },
-};
+    }
+  }
+}
 </script>
 
 <style>
