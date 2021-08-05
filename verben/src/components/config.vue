@@ -3,9 +3,9 @@
     <p id="instrucao">
       Selecione os tempos verbais que você quer praticar e clique em iniciar!
     </p>
-    <v-container>
-      <v-row justify="space-around">
-        <v-col md="4">
+    <v-container >
+      <v-row >
+        <v-col md="3">
           <h2 class="tituloTempos">Indicativ</h2>
           <v-checkbox
             v-model="temposVerbais"
@@ -51,7 +51,7 @@
           </v-checkbox>
         </v-col>
 
-        <v-col md="4">
+        <v-col md="3">
           <h2 class="tituloTempos">Konjunktiv1</h2>
           <v-checkbox
             v-model="temposVerbais"
@@ -76,7 +76,7 @@
           </v-checkbox>
         </v-col>
 
-        <v-col md="4">
+        <v-col md="3">
           <h2 class="tituloTempos">Konjunktiv2</h2>
           <v-checkbox
             v-model="temposVerbais"
@@ -100,6 +100,26 @@
           >
           </v-checkbox>
         </v-col>
+
+        <v-col md="3" >
+          <v-radio-group class="semTopMargin" v-model="verboAux" mandatory radio-margin-right = "0px" >
+          <h2 class="tituloTempos">Verbo auxiliar</h2>
+          <br/>
+          <v-radio
+            label="Sein"
+            value="SEIN"
+            color="#6B705C"
+          >
+          </v-radio>
+          <br/>
+          <v-radio
+            label="Haben"
+            value="HABEN"
+            color="#6B705C"
+          >
+          </v-radio>
+          </v-radio-group>
+        </v-col>
       </v-row>
         <router-link to ="/jogar">
           <v-btn elevation="12" color="#B7B7A4" block>Iniciar </v-btn>
@@ -113,6 +133,7 @@ export default {
   data: function () {
     return {
       temposVerbais: [],
+      verboAux: ""
     };
   },
 };
@@ -129,5 +150,10 @@ p#instrucao {
   text-align: center;
   color: #4c4f40;
   font-weight: bold;
+  margin-bottom: 20px;
+}
+
+.v-input--selection-controls {
+  margin-top: 0px !important;
 }
 </style>
