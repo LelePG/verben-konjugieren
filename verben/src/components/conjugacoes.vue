@@ -123,6 +123,7 @@
 const GermanVerbsLib = require("german-verbs");
 const GermanVerbsDict = require("german-verbs-dict/dist/verbs");
 import { mapMutations } from "vuex";
+import {mapGetters} from 'vuex'
 
 export default {
   props: ["tempoVerbal", "verbo"],
@@ -153,19 +154,24 @@ export default {
       resposta: {},
       pontos: 0,
       escondeResposta: true,
+      verboAuxiliar: ""
     };
   },
+  computed:{
+      ...mapGetters(["getVerboAuxiliar"])
+  },
   created: function () {
+    this.verboAuxiliar = this.getVerboAuxiliar
     try {
-      this.resposta.ich = GermanVerbsLib.getConjugation(GermanVerbsDict, this.verbo,this.tempoVerbal,1,"S")[0],
-      this.resposta.du = GermanVerbsLib.getConjugation(GermanVerbsDict, this.verbo, this.tempoVerbal,2, "S")[0],
-      this.resposta.er = GermanVerbsLib.getConjugation(GermanVerbsDict, this.verbo, this.tempoVerbal,3,"S")[0],
-      this.resposta.es = GermanVerbsLib.getConjugation(GermanVerbsDict, this.verbo, this.tempoVerbal,3,"S")[0],
-      this.resposta.sieS = GermanVerbsLib.getConjugation(GermanVerbsDict, this.verbo, this.tempoVerbal,3,"S")[0],
-      this.resposta.wir = GermanVerbsLib.getConjugation(GermanVerbsDict, this.verbo, this.tempoVerbal,1,"P")[0],
-      this.resposta.ihr = GermanVerbsLib.getConjugation(GermanVerbsDict, this.verbo, this.tempoVerbal,2,"P")[0],
-      this.resposta.sieP = GermanVerbsLib.getConjugation(GermanVerbsDict,this.verbo,this.tempoVerbal,3,"P")[0],
-      this.resposta.Sie = GermanVerbsLib.getConjugation(GermanVerbsDict,this.verbo,this.tempoVerbal,3,"P")[0];
+      this.resposta.ich = GermanVerbsLib.getConjugation(GermanVerbsDict, this.verbo,this.tempoVerbal,1,"S",this.verboAuxiliar).join(" "),
+      this.resposta.du = GermanVerbsLib.getConjugation(GermanVerbsDict, this.verbo, this.tempoVerbal,2, "S",this.verboAuxiliar).join(" "),
+      this.resposta.er = GermanVerbsLib.getConjugation(GermanVerbsDict, this.verbo, this.tempoVerbal,3,"S",this.verboAuxiliar).join(" "),
+      this.resposta.es = GermanVerbsLib.getConjugation(GermanVerbsDict, this.verbo, this.tempoVerbal,3,"S",this.verboAuxiliar).join(" "),
+      this.resposta.sieS = GermanVerbsLib.getConjugation(GermanVerbsDict, this.verbo, this.tempoVerbal,3,"S",this.verboAuxiliar).join(" "),
+      this.resposta.wir = GermanVerbsLib.getConjugation(GermanVerbsDict, this.verbo, this.tempoVerbal,1,"P",this.verboAuxiliar).join(" "),
+      this.resposta.ihr = GermanVerbsLib.getConjugation(GermanVerbsDict, this.verbo, this.tempoVerbal,2,"P",this.verboAuxiliar).join(" "),
+      this.resposta.sieP = GermanVerbsLib.getConjugation(GermanVerbsDict,this.verbo,this.tempoVerbal,3,"P",this.verboAuxiliar).join(" "),
+      this.resposta.Sie = GermanVerbsLib.getConjugation(GermanVerbsDict,this.verbo,this.tempoVerbal,3,"P",this.verboAuxiliar).join(" ");
     } catch (e) {
       document.location.reload(true);
     }
