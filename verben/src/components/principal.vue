@@ -3,18 +3,19 @@
   <h1 id="verboAtual">O verbo é {{verbo}} - {{traducao}}</h1>
   <h2 id="pontuacao">Pontos: {{getPontos}}</h2>
   <v-container>
-  <v-row >
+  <v-row>
   <Conjugacoes v-for="tempo in tempos" :key="tempo" :tempoVerbal="tempo" :verbo="verbo" />
   </v-row>
   </v-container>
   <div id = "botoesEspecias">
     <button class = "btn-especial" @click="insereCaracter('ß')" >ß</button>
-    <button class = "btn-especial" @click="insereCaracter('Ä')" >Ä</button>
     <button class = "btn-especial" @click="insereCaracter('ä')" >ä</button>
-    <button class = "btn-especial" @click="insereCaracter('Ö')" >Ö</button>
     <button class = "btn-especial" @click="insereCaracter('ö')" >ö</button>
-    <button class = "btn-especial" @click="insereCaracter('Ü')" >Ü</button>
     <button class = "btn-especial" @click="insereCaracter('ü')" >ü</button>
+    <button class = "btn-especial" @click="insereCaracter('Ä')" >Ä</button>
+    <button class = "btn-especial" @click="insereCaracter('Ö')" >Ö</button>
+    <button class = "btn-especial" @click="insereCaracter('Ü')" >Ü</button>
+
     <br/>
 
   <router-link to ="/">

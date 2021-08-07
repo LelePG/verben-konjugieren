@@ -210,13 +210,12 @@ export default {
 
 <style>
 div.conjugacoes {
-  margin-left: 25px;
+  margin:10px;
   padding: 15px;
   border: 4px solid #6b705c;
   box-shadow: 2px 2px #030303b0;
   border-radius: 10px;
   min-width: 220px;
-  margin-bottom: 20px;
 }
 
 div.titulo{
@@ -228,6 +227,7 @@ h3#tempoVerbal{
   text-align: center;
   margin-right: 10px;
 }
+
 div.titulo i{
  float:right;
  text-align: left;
