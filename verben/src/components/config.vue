@@ -135,13 +135,23 @@ import {mapMutations} from 'vuex'
 export default {
   data: function () {
     return {
-      temposVerbais: ["PRASENS"],
+      temposVerbais: [],
       verboAux: "SEIN"
     };
   },
   methods:{
     ...mapMutations['setTemposVerbais', 'setVerboAuxiliar'],
     carregaInfo: async function(){
+      if(!this.temposVerbais.length){
+        window.alert("Você precisa selecionar pelo menos um tempo.")
+        return
+
+      }
+      else if(this.temposVerbais.length > 5){
+        window.alert("Você selecionou tempos demais.\nSelecione até 5 tempos.")
+        return
+      }
+      
       await this.$store.commit("setTemposVerbais", this.temposVerbais)
       await this.$store.commit('setVerboAuxiliar', this.verboAux)
       this.$router.push('/jogar')

@@ -191,7 +191,6 @@ export default {
     verificaResposta: function () {
       let conjugacoes = Object.entries(this.entradasUsuario); //retorna um array
       for (let [pessoa,resposta] of conjugacoes) {
-        console.log(pessoa)
         if(this.respostaJaTaCerta(pessoa)){
           continue;
         }
@@ -213,10 +212,11 @@ export default {
 div.conjugacoes {
   margin-left: 25px;
   padding: 15px;
-  width: 210px;
   border: 4px solid #6b705c;
   box-shadow: 2px 2px #030303b0;
   border-radius: 10px;
+  min-width: 220px;
+  margin-bottom: 20px;
 }
 
 div.titulo{
@@ -226,6 +226,7 @@ div.titulo{
 h3#tempoVerbal{
   display: inline;
   text-align: center;
+  margin-right: 10px;
 }
 div.titulo i{
  float:right;
@@ -245,7 +246,7 @@ ul#tentantivasUsuario {
 
 ul#tentantivasUsuario li {
   display: flex;
-  justify-content: space-between;
+  justify-content: space-around;
   margin: 4px;
 }
 
