@@ -104,7 +104,6 @@
         <v-col md="3" >
           <v-radio-group class="semTopMargin" v-model="verboAux" mandatory radio-margin-right = "0px" >
           <h2 class="tituloTempos">Verbo auxiliar</h2>
-          <br/>
           <v-radio
             label="Sein"
             value="SEIN"
@@ -121,7 +120,9 @@
           </v-radio-group>
         </v-col>
       </v-row>
-        <router-link to ="/jogar">
+        <router-link to="/jogar"  
+        event = ""
+        @click.native="carregaInfo()">
           <v-btn elevation="12" color="#B7B7A4" block>Iniciar </v-btn>
         </router-link>
     </v-container>
@@ -129,12 +130,23 @@
 </template>
 
 <script>
+import {mapMutations} from 'vuex'
+
 export default {
   data: function () {
     return {
-      temposVerbais: [],
-      verboAux: ""
+      temposVerbais: ["PRASENS"],
+      verboAux: "SEIN"
     };
+  },
+  methods:{
+    ...mapMutations['setTemposVerbais', 'setVerboAuxiliar'],
+    carregaInfo: async function(){
+      await this.$store.commit("setTemposVerbais", this.temposVerbais)
+      await this.$store.commit('setVerboAuxiliar', this.verboAux)
+      this.$router.push('/jogar')
+      console.log("acho que roda")
+    }
   },
 };
 </script>
@@ -142,6 +154,7 @@ export default {
 <style>
 h2.tituloTempos {
   color: #4c4f40;
+  margin-bottom: 15px;
 }
 
 p#instrucao {
@@ -150,7 +163,6 @@ p#instrucao {
   text-align: center;
   color: #4c4f40;
   font-weight: bold;
-  margin-bottom: 20px;
 }
 
 .v-input--selection-controls {

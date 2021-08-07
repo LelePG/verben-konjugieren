@@ -173,7 +173,7 @@ export default {
       this.resposta.sieP = GermanVerbsLib.getConjugation(GermanVerbsDict,this.verbo,this.tempoVerbal,3,"P",this.verboAuxiliar).join(" "),
       this.resposta.Sie = GermanVerbsLib.getConjugation(GermanVerbsDict,this.verbo,this.tempoVerbal,3,"P",this.verboAuxiliar).join(" ");
     } catch (e) {
-      document.location.reload(true);
+      //document.location.reload(true);
     }
   },
   methods: {

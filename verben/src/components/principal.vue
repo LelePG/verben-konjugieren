@@ -52,6 +52,8 @@ export default {
         this.traducao = verboEtraducao[1].trim()
 
         this.tempos = this.getTemposVerbais
+
+        console.log(this.tempos)
     }, 
     methods :{
       insereCaracter: function(caracter){
@@ -59,7 +61,9 @@ export default {
         inputFocado.value += caracter
         inputFocado.focus()
       }
-    }
+    },
+    
+    
 }
 </script>
 
