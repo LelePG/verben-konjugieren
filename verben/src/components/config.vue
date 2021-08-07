@@ -145,7 +145,6 @@ export default {
       await this.$store.commit("setTemposVerbais", this.temposVerbais)
       await this.$store.commit('setVerboAuxiliar', this.verboAux)
       this.$router.push('/jogar')
-      console.log("acho que roda")
     }
   },
 };

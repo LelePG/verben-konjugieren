@@ -8,7 +8,7 @@ export default new Vuex.Store({
     inputFocus: "",
     pontos : 0,
     temposVerbais: [],
-    verboAuxiliar: "SEIN",
+    verboAuxiliar: "",
   },
   getters:{
     getInputFocus: function(state){
@@ -32,13 +32,9 @@ export default new Vuex.Store({
       state.pontos += pontos
     },
     setTemposVerbais: function(state, temposVerbais){
-      console.log("atualizando tempos verbais")
-      console.log(temposVerbais)
       state.temposVerbais = temposVerbais
-      console.log(state.temposVerbais)
     },
     setVerboAuxiliar: function(state, verboAuxiliar){
-      console.log("atualizando verbo auxiliar")
       state.verboAuxiliar = verboAuxiliar
     },
   }
