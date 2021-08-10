@@ -1,4 +1,3 @@
-# Jogo-de-Verben-konjugieren
 <img src = "imagens/printConfig.png" >
 <img src = "imagens/printConjug.png">
 
