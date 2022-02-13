@@ -15,14 +15,18 @@
     <button class = "btn-especial" @click="insereCaracter('Ä')" >Ä</button>
     <button class = "btn-especial" @click="insereCaracter('Ö')" >Ö</button>
     <button class = "btn-especial" @click="insereCaracter('Ü')" >Ü</button>
+  </div>
 
-    <br/>
-
+<div id = "botoesNavegacao">
   <router-link to ="/">
-  <v-btn color = "#B7B7A4">Reiniciar</v-btn>
+  <v-btn color = "#B7B7A4">Voltar</v-btn>
   </router-link>
 
-  </div>
+  <a href ="/jogar">
+  <v-btn color = "#B7B7A4">Recarregar</v-btn>
+  </a>
+</div>
+
   </v-card>
 </template>
 
@@ -80,9 +84,19 @@ button.btn-especial{
   border-radius: 5px;
 }
 
-div#botoesEspecias{
+div#botoesNavegacao button{
+  margin: 15px 10px;
+  background-color: #B7B7A4;
+  border-radius: 5px;
+}
+
+div#botoesEspecias, div#botoesNavegacao{
   text-align: center;
   padding-bottom:15px;
+}
+
+a, a:hover{
+  text-decoration: none;
 }
 
 </style>

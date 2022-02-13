@@ -160,7 +160,8 @@ export default {
   computed:{
       ...mapGetters(["getVerboAuxiliar"])
   },
-  created: function () {
+ beforeMount: function () {
+   console.log("hug")
     this.verboAuxiliar = this.getVerboAuxiliar
     try {
       this.resposta.ich = GermanVerbsLib.getConjugation(GermanVerbsDict, this.verbo,this.tempoVerbal,1,"S",this.verboAuxiliar).join(" "),
@@ -174,6 +175,7 @@ export default {
       this.resposta.Sie = GermanVerbsLib.getConjugation(GermanVerbsDict,this.verbo,this.tempoVerbal,3,"P",this.verboAuxiliar).join(" ");
     } catch (e) {
       //document.location.reload(true);
+      console.log("buig")
     }
   },
   methods: {
