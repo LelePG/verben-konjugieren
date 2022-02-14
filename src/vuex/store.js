@@ -7,8 +7,8 @@ export default new Vuex.Store({
   state: {
     inputFocus: "",
     pontos : 0,
-    temposVerbais: [],
-    verboAuxiliar: "",
+    verbalTenses: [],
+    auxVerb: "",
   },
   getters:{
     getInputFocus: function(state){
@@ -17,11 +17,11 @@ export default new Vuex.Store({
     getPontos: function(state){
       return state.pontos
     },
-    getTemposVerbais: function(state){
-      return state.temposVerbais
+    getVerbalTenses: function(state){
+      return state.verbalTenses
     },
-    getVerboAuxiliar : function(state){
-      return state.verboAuxiliar
+    getAuxVerb : function(state){
+      return state.auxVerb
     }
   },
   mutations: {
@@ -31,11 +31,11 @@ export default new Vuex.Store({
     setPontos: function(state, pontos){
       state.pontos += pontos
     },
-    setTemposVerbais: function(state, temposVerbais){
-      state.temposVerbais = temposVerbais
+    setVerbalTenses: function(state, verbalTenses){
+      state.verbalTenses = verbalTenses
     },
-    setVerboAuxiliar: function(state, verboAuxiliar){
-      state.verboAuxiliar = verboAuxiliar
+    setAuxVerb: function(state, auxVerb){
+      state.auxVerb = auxVerb
     },
   }
 })

@@ -1,33 +1,19 @@
 <template>
-  <main>
-    <v-app-bar color = "#6B705C"
-    height = "60px">
-    <h1 id = "titulo">Verben Konjugieren</h1>
-    </v-app-bar>
-    <br/>
-   <router-view/>
-  </main>
+	<main class="bg-dark">
+		<h1 class="mx-auto text-center py-3 text-light bg-primary">Verben Konjugieren</h1>
+		<router-view />
+	</main>
 </template>
 
 <script>
-//import Config from './components/config.vue';
-//import Principal from "./components/principal.vue"
 export default {
-  name: 'App',
-  components: {
-    //Principal
-   // Config
-  },
-
-  data: () => ({
-    //
-  }),
+	name: "App",
+	components: {},
 };
 </script>
 
-<style scoped>
-h1#titulo{
-  margin:auto;
-  color: #FFE8D6;
+<style>
+main {
+	height: 100vh;
 }
 </style>

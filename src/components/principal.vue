@@ -40,7 +40,7 @@ export default {
         Conjugacoes,
     },
     computed:{
-      ...mapGetters(["getInputFocus", "getPontos", "getTemposVerbais"])
+      ...mapGetters(["getInputFocus", "getPontos", "getVerbalTenses"])
     },
     data: function(){
         return{
@@ -56,7 +56,7 @@ export default {
         this.verbo = verboEtraducao[0].trim()
         this.traducao = verboEtraducao[1].trim()
 
-        this.tempos = this.getTemposVerbais
+        this.tempos = this.getVerbalTenses
     }, 
     methods :{
       insereCaracter: function(caracter){
