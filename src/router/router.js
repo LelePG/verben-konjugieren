@@ -3,7 +3,7 @@ import Router from 'vue-router'
 
 //Componentes que vão se renderizados e seus caminhos
 import Start from '../components/Start.vue'
-import Principal from '../components/principal.vue'
+import Principal from '../components/Principal.vue'
 
 Vue.use(Router)
 

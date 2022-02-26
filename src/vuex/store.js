@@ -5,14 +5,14 @@ Vue.use(Vuex)
 
 export default new Vuex.Store({
   state: {
-    inputFocus: "",
+    inputWithFocus: "",
     pontos : 0,
     verbalTenses: [],
     auxVerb: "",
   },
   getters:{
-    getInputFocus: function(state){
-      return state.inputFocus
+    getInputWithFocus: function(state){
+      return state.inputWithFocus
     },
     getPontos: function(state){
       return state.pontos
@@ -25,8 +25,8 @@ export default new Vuex.Store({
     }
   },
   mutations: {
-    setInputFocus: function(state, input) {
-     state.inputFocus = input
+    setInputWithFocus: function(state, input) {
+     state.inputWithFocus = input
     },
     setPontos: function(state, pontos){
       state.pontos += pontos

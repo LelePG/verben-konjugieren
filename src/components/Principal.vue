@@ -31,7 +31,7 @@
 </template>
 
 <script>
-import Conjugacoes from "./conjugacoes.vue"
+import Conjugacoes from "./Conjugations.vue"
 import file from 'raw-loader!../assets/listaVerbos1.txt'
 import {mapGetters} from 'vuex'
 
