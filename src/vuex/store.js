@@ -6,7 +6,7 @@ Vue.use(Vuex)
 export default new Vuex.Store({
   state: {
     inputWithFocus: "",
-    pontos : 0,
+    points : 0,
     verbalTenses: [],
     auxVerb: "",
   },
@@ -14,8 +14,8 @@ export default new Vuex.Store({
     getInputWithFocus: function(state){
       return state.inputWithFocus
     },
-    getPontos: function(state){
-      return state.pontos
+    getPoints: function(state){
+      return state.points
     },
     getVerbalTenses: function(state){
       return state.verbalTenses
@@ -28,8 +28,8 @@ export default new Vuex.Store({
     setInputWithFocus: function(state, input) {
      state.inputWithFocus = input
     },
-    setPontos: function(state, pontos){
-      state.pontos += pontos
+    addPoints: function(state, points){
+      state.points += points
     },
     setVerbalTenses: function(state, verbalTenses){
       state.verbalTenses = verbalTenses

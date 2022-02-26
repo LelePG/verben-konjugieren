@@ -14,7 +14,7 @@ export default {
 	data: function() {
 		return {
 			userInput: "",
-			inputClasses: "border border-3 border-dark rounded-lg pl-1 w-auto",
+			inputClasses: "border-with-width-sm border-3 border-dark rounded-lg pl-1 w-75",
 		};
 	},
 	computed: {
@@ -29,15 +29,25 @@ export default {
 	},
 	watch: {
 		correctConjugation: function() {
+			const isAlreadyWrong = this.classes.includes(" wrong");
+			let score = 0;
 			if (this.conjugationIsCorrect()) {
-				this.classes = this.classes.includes(" wrong") ? this.classes.replace(" wrong", " correct") : this.classes.concat(" correct");
+				console.log("tá certo");
+				if (isAlreadyWrong) {
+					score += 2;
+					this.classes = this.classes.replace(" wrong", " correct");
+				} else {
+					score += 5;
+					this.classes = this.classes.concat(" correct");
+				}
 			} else {
-				this.classes = this.classes.includes(" correct") ? this.classes.replace(" correct", " wrong") : this.classes.concat(" wrong");
+				this.classes = this.classes.concat(" wrong");
 			}
+			this.$store.commit("addPoints", score);
 		},
 	},
 	methods: {
-		...mapMutations(["setInputWithFocus"]),
+		...mapMutations(["setInputWithFocus, addPoints"]),
 		changeInputWithFocus: function() {
 			const focusedInput = this.$el.querySelector(`input[type="text"]`);
 			this.$store.commit("setInputWithFocus", focusedInput);
@@ -50,6 +60,10 @@ export default {
 </script>
 
 <style>
+.border-with-width-sm {
+	border: 2px solid;
+}
+
 .correct {
 	background-color: rgba(135, 253, 135, 0.555);
 }

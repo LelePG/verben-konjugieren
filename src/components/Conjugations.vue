@@ -1,11 +1,10 @@
 <template>
-	<div class="conjugations  text-dark">
-		<div class="text-dark d-flex">
-			<h3>{{ tempoVerbal }}</h3>
-			<i class="far fa-lightbulb" @click="showAnswer = !showAnswer"></i>
+	<div class="conjugations m-2 p-3 text-dark rounded-lg border-primary border-with-width-lg">
+		<div class="text-dark d-inline-flex w-100 justify-content-between align-items-center">
+			<h3 class="m-0">{{ verbalTense }}</h3>
+			<i class="far fa-lightbulb d-float float-right" @click="showAnswer = !showAnswer"></i>
 		</div>
-		<ul id="tentantivasUsuario">
-			<!-- <PersonConjugation person="ich" answer="ho" showAnswer="showAnswer" correctConjugation="verify" /> -->
+		<ul>
 			<PersonConjugation person="ich" :answer="verbalPeople.ich.conjugation" :showAnswer="showAnswer" :correctConjugation="verify" />
 			<PersonConjugation person="du" :answer="verbalPeople.du.conjugation" :showAnswer="showAnswer" :correctConjugation="verify" />
 			<PersonConjugation person="er/sie/es" :answer="verbalPeople.es.conjugation" :showAnswer="showAnswer" :correctConjugation="verify" />
@@ -20,20 +19,17 @@
 <script>
 const GermanVerbsLib = require("german-verbs");
 const GermanVerbsDict = require("german-verbs-dict/dist/verbs");
-import { mapMutations } from "vuex";
 import { mapGetters } from "vuex";
 import PersonConjugation from "./PersonConjugation.vue";
 
 export default {
-	props: ["tempoVerbal", "verbo"],
+	props: ["verbalTense", "verb"],
 	components: {
 		PersonConjugation,
 	},
 	data: function() {
 		return {
 			verify: false,
-			resposta: {},
-			pontos: 0,
 			showAnswer: false,
 			auxVerb: "",
 			verbalPeople: {
@@ -55,22 +51,19 @@ export default {
 			for (let verbalPerson of Object.values(this.verbalPeople)) {
 				const conjugationFromAPI = GermanVerbsLib.getConjugation(
 					GermanVerbsDict,
-					this.verbo,
-					this.tempoVerbal,
+					this.verb,
+					this.verbalTense,
 					verbalPerson.person,
 					verbalPerson.number,
 					this.auxVerb
 				).join(" ");
 				verbalPerson.conjugation = conjugationFromAPI;
 			}
-			console.log(this.verbalPeople);
 		} catch (e) {
 			console.log(e);
 		}
 	},
 	methods: {
-		...mapMutations(["setInputWithFocus", "setPontos"]),
-
 		verificaResposta: function() {
 			this.verify = !this.verify;
 		},
@@ -79,35 +72,11 @@ export default {
 </script>
 
 <style>
-div.conjugations {
-	margin: 10px;
-	padding: 15px;
-	border: 4px solid #6b705c;
-	box-shadow: 2px 2px #030303b0;
-	border-radius: 10px;
-	min-width: 220px;
+.border-with-width-lg {
+	border: 4px solid;
 }
 
-h3#tempoVerbal {
-	display: inline;
-	text-align: center;
-	margin-right: 10px;
-}
-
-div.titulo i {
-	float: right;
-	text-align: left;
-}
-
-ul#tentantivasUsuario {
+ul {
 	list-style-type: none;
-	margin-bottom: 10px;
-}
-
-p.respostasMostrar {
-	color: #6b705c;
-	text-align: center;
-	margin-top: 8px;
-	margin-bottom: 7px;
 }
 </style>

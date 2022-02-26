@@ -1,10 +1,10 @@
 <template>
   <v-card color="#FFE8D6" class="pa-2">
   <h1 id="verboAtual">O verbo é {{verbo}} - {{traducao}}</h1>
-  <h2 id="pontuacao">Pontos: {{getPontos}}</h2>
+  <h2 id="pontuacao">Pontos: {{getPoints}}</h2>
   <v-container>
   <v-row>
-  <Conjugacoes v-for="tempo in tempos" :key="tempo" :tempoVerbal="tempo" :verbo="verbo" />
+  <Conjugacoes v-for="tempo in tempos" :key="tempo" :verbalTense="tempo" :verb="verbo" />
   </v-row>
   </v-container>
   <div id = "botoesEspecias">
@@ -40,7 +40,7 @@ export default {
         Conjugacoes,
     },
     computed:{
-      ...mapGetters(["getInputFocus", "getPontos", "getVerbalTenses"])
+      ...mapGetters(["getInputFocus", "getPoints", "getVerbalTenses"])
     },
     data: function(){
         return{
