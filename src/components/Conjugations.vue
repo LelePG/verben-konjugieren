@@ -1,8 +1,8 @@
 <template>
 	<div class="conjugations m-2 p-3 text-dark rounded-lg border-primary border-with-width-lg custom-width">
 		<div class="text-dark d-inline-flex w-100 justify-content-between align-items-center">
-			<h3 class="m-0">{{ verbalTense }}</h3>
-			<i class="far fa-lightbulb d-float float-right" @click="showAnswer = !showAnswer"></i>
+			<h5 class="m-0">{{ verbalTense }}</h5>
+			<i class="far fa-lightbulb d-float float-right ml-1" @click="showAnswer = !showAnswer"></i>
 		</div>
 		<ul>
 			<PersonConjugation person="ich" :answer="verbalPeople.ich.conjugation" :showAnswer="showAnswer" :correctConjugation="verify" />
@@ -77,7 +77,7 @@ export default {
 }
 
 .custom-width{
-	width : 280px;
+	width : auto;
 }
 
 ul {

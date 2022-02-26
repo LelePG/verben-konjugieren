@@ -14,7 +14,7 @@ export default {
 	data: function() {
 		return {
 			userInput: "",
-			inputClasses: "border-with-width-sm border-3 border-dark rounded-lg pl-1 custom-width-input",
+			inputClasses: "border-with-width-sm border-3 border-primary rounded-lg pl-1 custom-width-input",
 		};
 	},
 	computed: {
@@ -29,19 +29,24 @@ export default {
 	},
 	watch: {
 		correctConjugation: function() {
+			const isAlreadyCorrect = this.classes.includes(" correct");
 			const isAlreadyWrong = this.classes.includes(" wrong");
+			if (isAlreadyCorrect) {
+				return;
+			}
 			let score = 0;
 			if (this.conjugationIsCorrect()) {
-				console.log("tá certo");
 				if (isAlreadyWrong) {
-					score += 2;
-					this.classes = this.classes.replace(" wrong", " correct");
+					score = 2;
+					this.classes = this.classes.replace("wrong", "correct");
 				} else {
-					score += 5;
+					score = 5;
 					this.classes = this.classes.concat(" correct");
 				}
 			} else {
-				this.classes = this.classes.concat(" wrong");
+				if (!isAlreadyWrong) {
+					this.classes = this.classes.concat(" wrong");
+				}
 			}
 			this.$store.commit("addPoints", score);
 		},
@@ -64,8 +69,8 @@ export default {
 	border: 2px solid;
 }
 
-.custom-width-input{
-	width : 160px;
+.custom-width-input {
+	width: 160px;
 }
 
 .correct {
