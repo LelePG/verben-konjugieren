@@ -1,5 +1,5 @@
 <template>
-	<li class="text-dark d-flex justify-content-between m-1 ">
+	<li class="text-dark d-flex justify-content-between m-1 w-100">
 		<label class="mr-2">{{ person }}</label>
 		<input v-if="showAnswer" type="text" :name="person" :placeholder="answer" disabled :class="inputClasses" />
 		<input v-else type="text" :name="person" @focus="changeInputWithFocus" v-model="userInput" :class="inputClasses" />
@@ -14,7 +14,7 @@ export default {
 	data: function() {
 		return {
 			userInput: "",
-			inputClasses: "border-with-width-sm border-3 border-dark rounded-lg pl-1 w-75",
+			inputClasses: "border-with-width-sm border-3 border-dark rounded-lg pl-1 custom-width-input",
 		};
 	},
 	computed: {
@@ -62,6 +62,10 @@ export default {
 <style>
 .border-with-width-sm {
 	border: 2px solid;
+}
+
+.custom-width-input{
+	width : 160px;
 }
 
 .correct {

@@ -1,5 +1,5 @@
 <template>
-	<div class="conjugations m-2 p-3 text-dark rounded-lg border-primary border-with-width-lg">
+	<div class="conjugations m-2 p-3 text-dark rounded-lg border-primary border-with-width-lg custom-width">
 		<div class="text-dark d-inline-flex w-100 justify-content-between align-items-center">
 			<h3 class="m-0">{{ verbalTense }}</h3>
 			<i class="far fa-lightbulb d-float float-right" @click="showAnswer = !showAnswer"></i>
@@ -74,6 +74,10 @@ export default {
 <style>
 .border-with-width-lg {
 	border: 4px solid;
+}
+
+.custom-width{
+	width : 280px;
 }
 
 ul {

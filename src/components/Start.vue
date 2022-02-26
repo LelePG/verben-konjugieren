@@ -1,34 +1,34 @@
 <template>
-	<div class="bg-light pb-5 d-flex flex-column align-items-center">
-		<h4 class="pt-4 pb-3 text-dark text-center font-weight-bolder">
+	<div class="bg-light pb-5 d-flex flex-column align-items-center text-dark">
+		<h4 class="pt-4 pb-3 text-center font-weight-bolder">
 			Selecione os tempos verbais que você quer praticar e clique em iniciar!
 		</h4>
 		<b-form class="pa-2 d-flex justify-content-around w-100">
 			<b-form-group>
-				<h4 class="text-dark">Indicativ</h4>
-				<b-form-checkbox v-for="tense in indicativ" class="text-dark" v-model="verbalTenses" :value="tense.value" :key="tense.text">{{
+				<h4>Indicativ</h4>
+				<b-form-checkbox v-for="tense in indicativ" v-model="verbalTenses" :value="tense.value" :key="tense.text">{{
 					tense.text
 				}}</b-form-checkbox>
 			</b-form-group>
 
 			<b-form-group>
-				<h4 class="text-dark">Konjunktiv1</h4>
-				<b-form-checkbox v-for="tense in konjunktiv1" class="text-dark" v-model="verbalTenses" :value="tense.value" :key="tense.text">{{
+				<h4>Konjunktiv1</h4>
+				<b-form-checkbox v-for="tense in konjunktiv1" v-model="verbalTenses" :value="tense.value" :key="tense.text">{{
 					tense.text
 				}}</b-form-checkbox>
 			</b-form-group>
 
 			<b-form-group>
-				<h4 class="text-dark">Konjunktiv2</h4>
-				<b-form-checkbox v-for="tense in konjunktiv2" class="text-dark" v-model="verbalTenses" :value="tense.value" :key="tense.text">{{
+				<h4>Konjunktiv2</h4>
+				<b-form-checkbox v-for="tense in konjunktiv2" v-model="verbalTenses" :value="tense.value" :key="tense.text">{{
 					tense.text
 				}}</b-form-checkbox>
 			</b-form-group>
 
 			<b-form-group>
-				<h4 class="text-dark">Verbo auxiliar</h4>
-				<b-form-radio v-model="auxVerb" label="Sein" value="SEIN" class="text-dark"> Sein </b-form-radio>
-				<b-form-radio v-model="auxVerb" label="Haben" value="HABEN" class="text-dark"> Haben </b-form-radio>
+				<h4>Verbo auxiliar</h4>
+				<b-form-radio v-model="auxVerb" label="Sein" value="SEIN"> Sein </b-form-radio>
+				<b-form-radio v-model="auxVerb" label="Haben" value="HABEN"> Haben </b-form-radio>
 			</b-form-group>
 		</b-form>
 
