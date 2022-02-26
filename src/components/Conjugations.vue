@@ -1,25 +1,18 @@
 <template>
-	<div class="conjugacoes">
-		<div class="titulo">
+	<div class="conjugations  text-dark">
+		<div class="text-dark">
 			<h3 id="tempoVerbal">{{ tempoVerbal }}</h3>
-			<i class="far fa-lightbulb" @click="escondeResposta = !escondeResposta"></i>
+			<i class="far fa-lightbulb" @click="showAnswer = !showAnswer"></i>
 		</div>
-		<div v-if="true">
-			<ul id="tentantivasUsuario">
-				<PersonConjugation person="ich" :answer="resposta.ich" :showAnswer="!escondeResposta" :usedClasses="classesInput.ich" />
-				<PersonConjugation person="du" :answer="resposta.du" :showAnswer="!escondeResposta" :usedClasses="classesInput.du" />
-				<PersonConjugation person="er/sie/es" :answer="resposta.es" :showAnswer="!escondeResposta" :usedClasses="classesInput.es" />
-				<PersonConjugation person="wir" :answer="resposta.wir" :showAnswer="!escondeResposta" :usedClasses="classesInput.wir" />
-				<PersonConjugation person="ihr" :answer="resposta.ihr" :showAnswer="!escondeResposta" :usedClasses="classesInput.ihr" />
-				<PersonConjugation person="sie/Sie" :answer="resposta.sieP" :showAnswer="!escondeResposta" :usedClasses="classesInput.sieP" />
-			</ul>
-			<v-btn color="#B7B7A4" block @click="verificaResposta"> Verificar </v-btn>
-		</div>
-
-		<div v-else>
-			<p class="respostasMostrar" v-for="pessoa in Object.entries(this.resposta)" :key="pessoa[0]">{{ pessoa[0] }} - {{ pessoa[1] }}</p>
-			<v-btn color="#B7B7A4" block @click="escondeResposta = true"> Voltar </v-btn>
-		</div>
+		<ul id="tentantivasUsuario">
+			<PersonConjugation person="ich" :answer="resposta.ich" :showAnswer="showAnswer" :usedClasses="classesInput.ich" />
+			<!-- <PersonConjugation person="du" :answer="resposta.du" :showAnswer="showAnswer" :usedClasses="classesInput.du" />
+			<PersonConjugation person="er/sie/es" :answer="resposta.es" :showAnswer="showAnswer" :usedClasses="classesInput.es" />
+			<PersonConjugation person="wir" :answer="resposta.wir" :showAnswer="showAnswer" :usedClasses="classesInput.wir" />
+			<PersonConjugation person="ihr" :answer="resposta.ihr" :showAnswer="showAnswer" :usedClasses="classesInput.ihr" />
+			<PersonConjugation person="sie/Sie" :answer="resposta.siePlural" :showAnswer="showAnswer" :usedClasses="classesInput.siePlural" /> -->
+		</ul>
+		<v-btn color="#B7B7A4" block @click="verificaResposta"> Verificar </v-btn>
 	</div>
 </template>
 
@@ -37,32 +30,25 @@ export default {
 	},
 	data: function() {
 		return {
-			verificar: false,
-			entradasUsuario: {
+      entradasUsuario: {
 				ich: "",
 				du: "",
-				er: "",
 				es: "",
-				sieS: "",
 				wir: "",
 				ihr: "",
-				sieP: "",
-				Sie: "",
+				siePlural: "",
 			},
 			classesInput: {
 				ich: "",
 				du: "",
-				er: "",
 				es: "",
-				sieS: "",
 				wir: "",
 				ihr: "",
-				sieP: "",
-				Sie: "",
+				siePlural: "",
 			},
 			resposta: {},
 			pontos: 0,
-			escondeResposta: true,
+			showAnswer: false,
 			auxVerb: "",
 		};
 	},
@@ -75,13 +61,10 @@ export default {
 		try {
 			(this.resposta.ich = GermanVerbsLib.getConjugation(GermanVerbsDict, this.verbo, this.tempoVerbal, 1, "S", this.auxVerb).join(" ")),
 				(this.resposta.du = GermanVerbsLib.getConjugation(GermanVerbsDict, this.verbo, this.tempoVerbal, 2, "S", this.auxVerb).join(" ")),
-				(this.resposta.er = GermanVerbsLib.getConjugation(GermanVerbsDict, this.verbo, this.tempoVerbal, 3, "S", this.auxVerb).join(" ")),
 				(this.resposta.es = GermanVerbsLib.getConjugation(GermanVerbsDict, this.verbo, this.tempoVerbal, 3, "S", this.auxVerb).join(" ")),
-				(this.resposta.sieS = GermanVerbsLib.getConjugation(GermanVerbsDict, this.verbo, this.tempoVerbal, 3, "S", this.auxVerb).join(" ")),
 				(this.resposta.wir = GermanVerbsLib.getConjugation(GermanVerbsDict, this.verbo, this.tempoVerbal, 1, "P", this.auxVerb).join(" ")),
 				(this.resposta.ihr = GermanVerbsLib.getConjugation(GermanVerbsDict, this.verbo, this.tempoVerbal, 2, "P", this.auxVerb).join(" ")),
-				(this.resposta.sieP = GermanVerbsLib.getConjugation(GermanVerbsDict, this.verbo, this.tempoVerbal, 3, "P", this.auxVerb).join(" ")),
-				(this.resposta.Sie = GermanVerbsLib.getConjugation(GermanVerbsDict, this.verbo, this.tempoVerbal, 3, "P", this.auxVerb).join(" "));
+				(this.resposta.siePlural = GermanVerbsLib.getConjugation(GermanVerbsDict, this.verbo, this.tempoVerbal, 3, "P", this.auxVerb).join(" "))
 		} catch (e) {
 			//document.location.reload(true);
 			console.log("buig");
@@ -99,12 +82,13 @@ export default {
 		respostaCerta: function(resposta, pessoa) {
 			return resposta.toLowerCase().trim() === this.resposta[pessoa].toLowerCase().trim();
 		},
+   
 		verificaResposta: function() {
 			this.verificar = true;
 			this.$emit("verify-conjugations");
 			console.log("emiti");
-			let conjugacoes = Object.entries(this.entradasUsuario); //retorna um array
-			for (let [pessoa, resposta] of conjugacoes) {
+			let conjugations = Object.entries(this.entradasUsuario); //retorna um array
+			for (let [pessoa, resposta] of conjugations) {
 				if (this.respostaJaTaCerta(pessoa)) {
 					continue;
 				}
@@ -123,7 +107,7 @@ export default {
 </script>
 
 <style>
-div.conjugacoes {
+div.conjugations {
 	margin: 10px;
 	padding: 15px;
 	border: 4px solid #6b705c;
@@ -132,9 +116,7 @@ div.conjugacoes {
 	min-width: 220px;
 }
 
-div.titulo {
-	color: #4c4f40;
-}
+
 
 h3#tempoVerbal {
 	display: inline;
@@ -160,10 +142,10 @@ p.respostasMostrar {
 }
 
 .certo {
-	background-color: rgba(14, 250, 14, 0.555);
+	background-color: rgba(135, 253, 135, 0.555);
 }
 
 .errado {
-	background-color: rgba(228, 59, 59, 0.808);
+	background-color: rgba(224, 127, 127, 0.808);
 }
 </style>

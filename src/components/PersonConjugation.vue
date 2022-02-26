@@ -1,8 +1,8 @@
 <template>
-	<li>
-		<span class="person">{{ person }}</span>
-		<span v-if="showAnswer === true">{{ answer }}</span>
-		<input v-else type="text" :name="person" @focus="changeInputWithFocus" v-model="userInput" :class="usedClasses" />
+	<li class="text-dark d-flex justify-content-between m-1 ">
+		<label class="mr-2">{{ person }}</label>
+		<input v-if="showAnswer" type="text" :name="person" :placeholder="answer" disabled :class="`border border-3 border-dark rounded-lg pl-1 w-auto ${usedClasses}`"/>
+		<input v-else type="text" :name="person" @focus="changeInputWithFocus" v-model="userInput" :class="`border border-3 border-dark rounded-lg pl-1 w-auto ${usedClasses}`" />
 	</li>
 </template>
 
@@ -26,20 +26,4 @@ export default {
 };
 </script>
 
-<style css-scoped>
-input[type="text"] {
-	border: 2px solid #6b705c;
-	border-radius: 5px;
-	width: 140px;
-}
 
-li {
-	display: flex;
-	justify-content: space-around;
-	margin: 4px;
-}
-
-li span {
-	width: 30px;
-}
-</style>
