@@ -1,16 +1,17 @@
 <template>
 	<div class="conjugations  text-dark">
-		<div class="text-dark">
-			<h3 id="tempoVerbal">{{ tempoVerbal }}</h3>
+		<div class="text-dark d-flex">
+			<h3>{{ tempoVerbal }}</h3>
 			<i class="far fa-lightbulb" @click="showAnswer = !showAnswer"></i>
 		</div>
 		<ul id="tentantivasUsuario">
-			<PersonConjugation person="ich" :answer="resposta.ich" :showAnswer="showAnswer" :usedClasses="classesInput.ich" />
-			<!-- <PersonConjugation person="du" :answer="resposta.du" :showAnswer="showAnswer" :usedClasses="classesInput.du" />
-			<PersonConjugation person="er/sie/es" :answer="resposta.es" :showAnswer="showAnswer" :usedClasses="classesInput.es" />
-			<PersonConjugation person="wir" :answer="resposta.wir" :showAnswer="showAnswer" :usedClasses="classesInput.wir" />
-			<PersonConjugation person="ihr" :answer="resposta.ihr" :showAnswer="showAnswer" :usedClasses="classesInput.ihr" />
-			<PersonConjugation person="sie/Sie" :answer="resposta.siePlural" :showAnswer="showAnswer" :usedClasses="classesInput.siePlural" /> -->
+			<!-- <PersonConjugation person="ich" answer="ho" showAnswer="showAnswer" correctConjugation="verify" /> -->
+			<PersonConjugation person="ich" :answer="verbalPeople.ich.conjugation" :showAnswer="showAnswer" :correctConjugation="verify" />
+			<PersonConjugation person="du" :answer="verbalPeople.du.conjugation" :showAnswer="showAnswer" :correctConjugation="verify" />
+			<PersonConjugation person="er/sie/es" :answer="verbalPeople.es.conjugation" :showAnswer="showAnswer" :correctConjugation="verify" />
+			<PersonConjugation person="wir" :answer="verbalPeople.wir.conjugation" :showAnswer="showAnswer" :correctConjugation="verify" />
+			<PersonConjugation person="ihr" :answer="verbalPeople.ihr.conjugation" :showAnswer="showAnswer" :correctConjugation="verify" />
+			<PersonConjugation person="sie/Sie" :answer="verbalPeople.sie.conjugation" :showAnswer="showAnswer" :correctConjugation="verify" />
 		</ul>
 		<v-btn color="#B7B7A4" block @click="verificaResposta"> Verificar </v-btn>
 	</div>
@@ -30,77 +31,48 @@ export default {
 	},
 	data: function() {
 		return {
-      entradasUsuario: {
-				ich: "",
-				du: "",
-				es: "",
-				wir: "",
-				ihr: "",
-				siePlural: "",
-			},
-			classesInput: {
-				ich: "",
-				du: "",
-				es: "",
-				wir: "",
-				ihr: "",
-				siePlural: "",
-			},
+			verify: false,
 			resposta: {},
 			pontos: 0,
 			showAnswer: false,
 			auxVerb: "",
+			verbalPeople: {
+				ich: { person: 1, number: "S" },
+				du: { person: 2, number: "S" },
+				es: { person: 3, number: "S" },
+				wir: { person: 1, number: "P" },
+				ihr: { person: 2, number: "P" },
+				sie: { person: 3, number: "P" },
+			},
 		};
 	},
 	computed: {
 		...mapGetters(["getAuxVerb"]),
 	},
 	beforeMount: function() {
-		console.log("hug");
 		this.auxVerb = this.getAuxVerb;
 		try {
-			(this.resposta.ich = GermanVerbsLib.getConjugation(GermanVerbsDict, this.verbo, this.tempoVerbal, 1, "S", this.auxVerb).join(" ")),
-				(this.resposta.du = GermanVerbsLib.getConjugation(GermanVerbsDict, this.verbo, this.tempoVerbal, 2, "S", this.auxVerb).join(" ")),
-				(this.resposta.es = GermanVerbsLib.getConjugation(GermanVerbsDict, this.verbo, this.tempoVerbal, 3, "S", this.auxVerb).join(" ")),
-				(this.resposta.wir = GermanVerbsLib.getConjugation(GermanVerbsDict, this.verbo, this.tempoVerbal, 1, "P", this.auxVerb).join(" ")),
-				(this.resposta.ihr = GermanVerbsLib.getConjugation(GermanVerbsDict, this.verbo, this.tempoVerbal, 2, "P", this.auxVerb).join(" ")),
-				(this.resposta.siePlural = GermanVerbsLib.getConjugation(GermanVerbsDict, this.verbo, this.tempoVerbal, 3, "P", this.auxVerb).join(" "))
+			for (let verbalPerson of Object.values(this.verbalPeople)) {
+				const conjugationFromAPI = GermanVerbsLib.getConjugation(
+					GermanVerbsDict,
+					this.verbo,
+					this.tempoVerbal,
+					verbalPerson.person,
+					verbalPerson.number,
+					this.auxVerb
+				).join(" ");
+				verbalPerson.conjugation = conjugationFromAPI;
+			}
+			console.log(this.verbalPeople);
 		} catch (e) {
-			//document.location.reload(true);
-			console.log("buig");
+			console.log(e);
 		}
 	},
 	methods: {
 		...mapMutations(["setInputWithFocus", "setPontos"]),
-		alteraInputFocus: function() {
-			const inputFocado = this.$el.querySelector(`input[type="text"]:focus`);
-			this.$store.commit("setInputWithFocus", inputFocado);
-		},
-		respostaJaTaCerta: function(nameDoInput) {
-			return this.classesInput[nameDoInput] === "certo";
-		},
-		respostaCerta: function(resposta, pessoa) {
-			return resposta.toLowerCase().trim() === this.resposta[pessoa].toLowerCase().trim();
-		},
-   
-		verificaResposta: function() {
-			this.verificar = true;
-			this.$emit("verify-conjugations");
-			console.log("emiti");
-			let conjugations = Object.entries(this.entradasUsuario); //retorna um array
-			for (let [pessoa, resposta] of conjugations) {
-				if (this.respostaJaTaCerta(pessoa)) {
-					continue;
-				}
 
-				if (this.respostaCerta(resposta, pessoa)) {
-					const pontosDaResposta = this.classesInput[pessoa] ? 5 : 10;
-					this.classesInput[pessoa] = "certo";
-					this.$store.commit("setPontos", pontosDaResposta);
-				} else {
-					this.classesInput[pessoa] = "errado";
-				}
-			}
+		verificaResposta: function() {
+			this.verify = !this.verify;
 		},
 	},
 };
@@ -115,8 +87,6 @@ div.conjugations {
 	border-radius: 10px;
 	min-width: 220px;
 }
-
-
 
 h3#tempoVerbal {
 	display: inline;
@@ -139,13 +109,5 @@ p.respostasMostrar {
 	text-align: center;
 	margin-top: 8px;
 	margin-bottom: 7px;
-}
-
-.certo {
-	background-color: rgba(135, 253, 135, 0.555);
-}
-
-.errado {
-	background-color: rgba(224, 127, 127, 0.808);
 }
 </style>
