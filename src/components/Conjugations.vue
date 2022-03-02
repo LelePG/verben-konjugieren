@@ -2,7 +2,6 @@
 	<div class="conjugations m-2 p-3 text-dark rounded-lg border-primary border-with-width-lg custom-width">
 		<div class="text-dark d-inline-flex w-100 justify-content-between align-items-center">
 			<h5 class="m-0">{{ verbalTense }}</h5>
-			{{ verb }}
 			<i class="far fa-lightbulb d-float float-right ml-1" @click="showAnswer = !showAnswer"></i>
 		</div>
 		<ul>
@@ -46,12 +45,16 @@ export default {
 	computed: {
 		...mapGetters(["getAuxVerb"]),
 	},
-
+	watch: {
+		verb: function() {
+			this.updateVerb();
+		},
+	},
 	methods: {
 		verificaResposta: function() {
 			this.verify = !this.verify;
 		},
-		updateVerb: function(){
+		updateVerb: function() {
 			try {
 				for (let verbalPerson of Object.values(this.verbalPeople)) {
 					const conjugationFromAPI = GermanVerbsLib.getConjugation(
@@ -67,9 +70,11 @@ export default {
 			} catch (e) {
 				console.log(e);
 			}
-		}
+		},
 	},
-
+	created: function() {
+		this.updateVerb();
+	},
 };
 </script>
 

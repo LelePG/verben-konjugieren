@@ -23,7 +23,6 @@
 			<router-link to="/">
 				<v-btn class="bg-warning mx-2 my-1">Voltar</v-btn>
 			</router-link>
-			{{ index }}
 			<v-btn v-if="index > 0" class="bg-warning mx-2 my-1" @click="() => index--">Anterior</v-btn>
 			<v-btn v-if="index < allVerbs.length-1" class="bg-warning mx-2 my-1" @click="index++">Próximo</v-btn>
 			<a href="/play">
