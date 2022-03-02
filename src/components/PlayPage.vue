@@ -23,7 +23,9 @@
 			<router-link to="/">
 				<v-btn class="bg-warning mx-2 my-1">Voltar</v-btn>
 			</router-link>
-
+			{{ index }}
+			<v-btn v-if="index > 0" class="bg-warning mx-2 my-1" @click="() => index--">Anterior</v-btn>
+			<v-btn v-if="index < allVerbs.length-1" class="bg-warning mx-2 my-1" @click="index++">Próximo</v-btn>
 			<a href="/play">
 				<v-btn class="bg-warning mx-2 my-3">Recarregar</v-btn>
 			</a>
@@ -33,7 +35,6 @@
 
 <script>
 import Conjugations from "./Conjugations.vue";
-import file from "raw-loader!../assets/listaVerbos1.txt";
 import { mapGetters } from "vuex";
 import CharButton from "./CharButton.vue";
 
@@ -43,21 +44,25 @@ export default {
 		CharButton,
 	},
 	computed: {
-		...mapGetters(["getPoints", "getVerbalTenses"]),
+		...mapGetters(["getPoints", "getVerbalTenses", "getVerbs"]),
+		verb: function() {
+			return this.allVerbs[this.index].name.trim();
+		},
+		translation: function() {
+			return this.allVerbs[this.index].translation.trim();
+		},
 	},
 	data: function() {
 		return {
-			verb: "brauchen",
-			translation: "procurar",
+			allVerbs: [],
+			index: 0,
 			verbalTenses: [],
 		};
 	},
-	created: function() { //Todo: modificar esta função
-		const texto = file.toString().split("\n");
-		const indiceAleatorio = Math.trunc(Math.random() * texto.length);
-		const verboEtraducao = texto[indiceAleatorio].split(":");
-		this.verb = verboEtraducao[0].trim();
-		this.translation = verboEtraducao[1].trim();
+	created: function() {
+		this.allVerbs = this.getVerbs;
+		// this.verb = this.allVerbs[this.index].name.trim();
+		// this.translation = this.allVerbs[this.index].translation.trim();
 		this.verbalTenses = this.getVerbalTenses;
 	},
 };

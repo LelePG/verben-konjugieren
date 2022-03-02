@@ -2,6 +2,7 @@
 	<div class="conjugations m-2 p-3 text-dark rounded-lg border-primary border-with-width-lg custom-width">
 		<div class="text-dark d-inline-flex w-100 justify-content-between align-items-center">
 			<h5 class="m-0">{{ verbalTense }}</h5>
+			{{ verb }}
 			<i class="far fa-lightbulb d-float float-right ml-1" @click="showAnswer = !showAnswer"></i>
 		</div>
 		<ul>
@@ -31,7 +32,7 @@ export default {
 		return {
 			verify: false,
 			showAnswer: false,
-			auxVerb: "",
+			auxVerb: this.getAuxVerb,
 			verbalPeople: {
 				ich: { person: 1, number: "S" },
 				du: { person: 2, number: "S" },
@@ -45,29 +46,30 @@ export default {
 	computed: {
 		...mapGetters(["getAuxVerb"]),
 	},
-	beforeMount: function() {
-		this.auxVerb = this.getAuxVerb;
-		try {
-			for (let verbalPerson of Object.values(this.verbalPeople)) {
-				const conjugationFromAPI = GermanVerbsLib.getConjugation(
-					GermanVerbsDict,
-					this.verb,
-					this.verbalTense,
-					verbalPerson.person,
-					verbalPerson.number,
-					this.auxVerb
-				).join(" ");
-				verbalPerson.conjugation = conjugationFromAPI;
-			}
-		} catch (e) {
-			console.log(e);
-		}
-	},
+
 	methods: {
 		verificaResposta: function() {
 			this.verify = !this.verify;
 		},
+		updateVerb: function(){
+			try {
+				for (let verbalPerson of Object.values(this.verbalPeople)) {
+					const conjugationFromAPI = GermanVerbsLib.getConjugation(
+						GermanVerbsDict,
+						this.verb,
+						this.verbalTense,
+						verbalPerson.person,
+						verbalPerson.number,
+						this.auxVerb
+					).join(" ");
+					verbalPerson.conjugation = conjugationFromAPI;
+				}
+			} catch (e) {
+				console.log(e);
+			}
+		}
 	},
+
 };
 </script>
 
@@ -76,8 +78,8 @@ export default {
 	border: 4px solid;
 }
 
-.custom-width{
-	width : auto;
+.custom-width {
+	width: auto;
 }
 
 ul {

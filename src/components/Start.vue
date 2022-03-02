@@ -6,23 +6,17 @@
 		<b-form class="pa-2 d-flex justify-content-around w-100">
 			<b-form-group>
 				<h4>Indicativ</h4>
-				<b-form-checkbox v-for="tense in indicativ" v-model="verbalTenses" :value="tense.value" :key="tense.text">{{
-					tense.text
-				}}</b-form-checkbox>
+				<b-form-checkbox v-for="tense in indicativ" v-model="verbalTenses" :value="tense.value" :key="tense.text">{{ tense.text }}</b-form-checkbox>
 			</b-form-group>
 
 			<b-form-group>
 				<h4>Konjunktiv1</h4>
-				<b-form-checkbox v-for="tense in konjunktiv1" v-model="verbalTenses" :value="tense.value" :key="tense.text">{{
-					tense.text
-				}}</b-form-checkbox>
+				<b-form-checkbox v-for="tense in konjunktiv1" v-model="verbalTenses" :value="tense.value" :key="tense.text">{{ tense.text }}</b-form-checkbox>
 			</b-form-group>
 
 			<b-form-group>
 				<h4>Konjunktiv2</h4>
-				<b-form-checkbox v-for="tense in konjunktiv2" v-model="verbalTenses" :value="tense.value" :key="tense.text">{{
-					tense.text
-				}}</b-form-checkbox>
+				<b-form-checkbox v-for="tense in konjunktiv2" v-model="verbalTenses" :value="tense.value" :key="tense.text">{{ tense.text }}</b-form-checkbox>
 			</b-form-group>
 
 			<b-form-group>
@@ -32,19 +26,24 @@
 			</b-form-group>
 		</b-form>
 
-		<router-link to="/play" event="" @click.native="loadInfo()" class="w-75 mt-3" >
-			<b-button class="bg-secondary w-100" v-b-hover="" >Iniciar </b-button>
+		<h3>Selecione um set de verbos</h3>
+		<b-form-select v-model="verbalSet" :options="verbalSetsWithNames" class="w-75"></b-form-select>
+
+		<router-link to="/play" event="" @click.native="loadInfo()" class="w-75 mt-3">
+			<b-button class="bg-secondary w-100" v-b-hover="">Iniciar </b-button>
 		</router-link>
 	</div>
 </template>
 
 <script>
 import { mapMutations } from "vuex";
-
+import sets from "./../assets/sets.js";
 export default {
 	data: function() {
 		return {
 			verbalTenses: [],
+			verbalSetsWithNames: sets.map((arr) => arr.map((element) => element.name)),
+			verbalSet: [],
 			indicativ: [
 				{ value: "PRASENS", text: "Prasens" },
 				{ value: "PRATERITUM", text: "Prateritum" },
@@ -67,7 +66,7 @@ export default {
 		};
 	},
 	methods: {
-		...mapMutations[("setVerbalTenses", "setAuxVerb")],
+		...mapMutations[("setVerbalTenses", "setAuxVerb", "setVerbs")],
 		loadInfo: async function() {
 			if (!this.verbalTenses.length) {
 				window.alert("Você precisa selecionar pelo menos um tempo.");
@@ -75,10 +74,16 @@ export default {
 			} else if (this.verbalTenses.length > 5) {
 				window.alert("Você selecionou tempos demais.\nSelecione até 5 tempos.");
 				return;
+			} else if (!this.verbalSet) {
+				window.alert("Selecione um set de verbos");
+				return;
 			}
+			const index = this.verbalSetsWithNames.indexOf(this.verbalSet);
+			const selectedSet = sets[index];
 
 			await this.$store.commit("setVerbalTenses", this.verbalTenses);
 			await this.$store.commit("setAuxVerb", this.auxVerb);
+			await this.$store.commit("setVerbs", selectedSet);
 			this.$router.push("/play");
 		},
 	},
