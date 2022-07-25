@@ -49,7 +49,7 @@
 
 <script>
 import { mapMutations } from "vuex";
-import sets from "./../assets/sets.js";
+import sets from "../assets/sets.js";
 export default {
 	data: function () {
 		return {
@@ -75,7 +75,7 @@ export default {
 				{ value: "KONJUNKTIV2_FUTUR2", text: "Futur2" },
 			],
 			auxVerb: "SEIN",
-			verbsToBeUsed: "",
+			verbsToBeUsed: "default",
 			customSet: "",
 		};
 	},
