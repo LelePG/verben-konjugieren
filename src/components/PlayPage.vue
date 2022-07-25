@@ -6,7 +6,7 @@
 		</div>
 		<v-container>
 			<v-row>
-				<Conjugations v-for="verbalTense in verbalTenses" :key="verbalTense" :verbalTense="verbalTense" :verb="verb" />
+				<Conjugations v-for="verbalTense in verbalTenses" :key="verbalTense" :verbalTense="verbalTense" />
 			</v-row>
 		</v-container>
 		<div class="text-center">
@@ -23,8 +23,8 @@
 			<router-link to="/">
 				<v-btn class="bg-warning mx-2 my-1">Voltar</v-btn>
 			</router-link>
-			<v-btn v-if="index > 0" class="bg-warning mx-2 my-1" @click="() => index--">Anterior</v-btn>
-			<v-btn v-if="index < allVerbs.length-1" class="bg-warning mx-2 my-1" @click="index++">Próximo</v-btn>
+			<v-btn v-if="index > 0" class="bg-warning mx-2 my-1" @click="decrementIndex">Anterior</v-btn>
+			<v-btn v-if="index < getAvailableVerbs" class="bg-warning mx-2 my-1" @click="incrementIndex">Próximo</v-btn>
 			<a href="/play">
 				<v-btn class="bg-warning mx-2 my-3">Recarregar</v-btn>
 			</a>
@@ -34,7 +34,7 @@
 
 <script>
 import Conjugations from "./Conjugations.vue";
-import { mapGetters } from "vuex";
+import { mapGetters, mapMutations } from "vuex";
 import CharButton from "./CharButton.vue";
 
 export default {
@@ -43,27 +43,39 @@ export default {
 		CharButton,
 	},
 	computed: {
-		...mapGetters(["getPoints", "getVerbalTenses", "getVerbs"]),
+		...mapGetters(["getPoints", "getVerbalTenses", "getCurrentVerb", "getAvailableVerbs", "getCurrentIndex"]),
 		verb: function() {
-			return this.allVerbs[this.index].name.trim();
+			return this.getCurrentVerb?.name.trim();
 		},
 		translation: function() {
-			return this.allVerbs[this.index].translation.trim();
+			return this.getCurrentVerb?.translation.trim();
 		},
+		index: function(){
+			return this.getCurrentIndex;
+		}
 	},
 	data: function() {
 		return {
-			allVerbs: [],
-			index: 0,
 			verbalTenses: [],
+			currentVerb:{},
 		};
 	},
+	methods:{
+		...mapMutations(["setCurrentIndex"]),
+		incrementIndex: function(){
+			this.$store.commit("setCurrentIndex", +1);
+		},
+		decrementIndex: function () {
+			this.$store.commit("setCurrentIndex", -1);
+		}
+	},
 	created: function() {
-		this.allVerbs = this.getVerbs;
-		// this.verb = this.allVerbs[this.index].name.trim();
-		// this.translation = this.allVerbs[this.index].translation.trim();
+		this.currentVerb = this.getCurrentVerb;
 		this.verbalTenses = this.getVerbalTenses;
 	},
+	updated: function(){
+		this.currentVerb = this.getCurrentVerb;
+	}
 };
 </script>
 

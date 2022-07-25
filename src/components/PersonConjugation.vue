@@ -50,6 +50,9 @@ export default {
 			}
 			this.$store.commit("addPoints", score);
 		},
+		answer: function(){
+			console.log("aaa")
+		}
 	},
 	methods: {
 		...mapMutations(["setInputWithFocus, addPoints"]),
@@ -60,7 +63,7 @@ export default {
 		conjugationIsCorrect() {
 			return this.userInput.toLowerCase().trim() === this.answer.toLowerCase().trim();
 		},
-	},
+	}
 };
 </script>
 

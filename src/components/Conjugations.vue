@@ -5,12 +5,12 @@
 			<i class="far fa-lightbulb d-float float-right ml-1" @click="showAnswer = !showAnswer"></i>
 		</div>
 		<ul>
-			<PersonConjugation person="ich" :answer="verbalPeople.ich.conjugation" :showAnswer="showAnswer" :correctConjugation="verify" />
-			<PersonConjugation person="du" :answer="verbalPeople.du.conjugation" :showAnswer="showAnswer" :correctConjugation="verify" />
-			<PersonConjugation person="er/sie/es" :answer="verbalPeople.es.conjugation" :showAnswer="showAnswer" :correctConjugation="verify" />
-			<PersonConjugation person="wir" :answer="verbalPeople.wir.conjugation" :showAnswer="showAnswer" :correctConjugation="verify" />
-			<PersonConjugation person="ihr" :answer="verbalPeople.ihr.conjugation" :showAnswer="showAnswer" :correctConjugation="verify" />
-			<PersonConjugation person="sie/Sie" :answer="verbalPeople.sie.conjugation" :showAnswer="showAnswer" :correctConjugation="verify" />
+			<PersonConjugation person="ich" :answer="verbalPeople.ich.conjugation" :showAnswer="showAnswer" :correctConjugation="verifyAnswers" />
+			<PersonConjugation person="du" :answer="verbalPeople.du.conjugation" :showAnswer="showAnswer" :correctConjugation="verifyAnswers" />
+			<PersonConjugation person="er/sie/es" :answer="verbalPeople.es.conjugation" :showAnswer="showAnswer" :correctConjugation="verifyAnswers" />
+			<PersonConjugation person="wir" :answer="verbalPeople.wir.conjugation" :showAnswer="showAnswer" :correctConjugation="verifyAnswers" />
+			<PersonConjugation person="ihr" :answer="verbalPeople.ihr.conjugation" :showAnswer="showAnswer" :correctConjugation="verifyAnswers" />
+			<PersonConjugation person="sie/Sie" :answer="verbalPeople.sie.conjugation" :showAnswer="showAnswer" :correctConjugation="verifyAnswers" />
 		</ul>
 		<v-btn color="#B7B7A4" block @click="verificaResposta"> Verificar </v-btn>
 	</div>
@@ -23,14 +23,15 @@ import { mapGetters } from "vuex";
 import PersonConjugation from "./PersonConjugation.vue";
 
 export default {
-	props: ["verbalTense", "verb"],
+	props: ["verbalTense"],
 	components: {
 		PersonConjugation,
 	},
 	data: function() {
 		return {
-			verify: false,
+			verifyAnswers: false,
 			showAnswer: false,
+			currentVerb: "",
 			auxVerb: this.getAuxVerb,
 			verbalPeople: {
 				ich: { person: 1, number: "S" },
@@ -43,23 +44,24 @@ export default {
 		};
 	},
 	computed: {
-		...mapGetters(["getAuxVerb"]),
-	},
-	watch: {
-		verb: function() {
-			this.updateVerb();
-		},
+		...mapGetters(["getAuxVerb", "getCurrentVerb"]),
+	}, watch:{
+		currentVerb: function (oldValue, newValue) {
+			console.log(oldValue)
+			console.log(newValue)
+			this.currentVerb = this.getCurrentVerb.name
+		}
 	},
 	methods: {
 		verificaResposta: function() {
-			this.verify = !this.verify;
+			this.verifyAnswers = !this.verifyAnswers;
 		},
 		updateVerb: function() {
 			try {
 				for (let verbalPerson of Object.values(this.verbalPeople)) {
 					const conjugationFromAPI = GermanVerbsLib.getConjugation(
 						GermanVerbsDict,
-						this.verb,
+						this.currentVerb,
 						this.verbalTense,
 						verbalPerson.person,
 						verbalPerson.number,
@@ -73,8 +75,11 @@ export default {
 		},
 	},
 	created: function() {
+		this.currentVerb = this.getCurrentVerb.name
 		this.updateVerb();
-	},
+	}, beforeUpdate(){
+		console.log("mudei")
+	}
 };
 </script>
 

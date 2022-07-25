@@ -10,6 +10,7 @@ export default new Vuex.Store({
     points : 0,
     verbalTenses: [],
     auxVerb: "",
+    currentIndex: 0,
   },
   getters:{
     getInputWithFocus: function(state){
@@ -26,7 +27,16 @@ export default new Vuex.Store({
     },
     getAuxVerb : function(state){
       return state.auxVerb
-    }
+    },
+    getCurrentVerb : function(state){
+      return state.verbs[state.currentIndex]
+    },
+    getAvailableVerbs : function(state){
+      return state.verbs.length -1
+    }, 
+    getCurrentIndex : function(state){
+      return state.currentIndex
+    }, 
   },
   mutations: {
     setInputWithFocus: function(state, input) {
@@ -43,6 +53,9 @@ export default new Vuex.Store({
     },
     setVerbs: function(state, verbs){
       state.verbs = verbs
+    },
+    setCurrentIndex: function(state, currentIndex){
+      state.currentIndex = currentIndex >=0 ? state.currentIndex+1: state.currentIndex-1
     },
   }
 })
