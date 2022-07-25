@@ -1,7 +1,7 @@
 <template>
 	<v-card class="bg-light pa-2">
 		<div class="d-flex flex-column align-items-center text-dark pt-2">
-			<h2>O tempo é {{ getVerbalTenses[index] }}</h2>
+			<h2>O tempo é {{ getCurrentVerbalTense }}</h2>
 			<h3>Pontos: {{ getPoints }}</h3>
 		</div>
 		<v-container>
@@ -43,13 +43,7 @@ export default {
 		CharButton,
 	},
 	computed: {
-		...mapGetters(["getPoints", "getVerbalTenses", "getCurrentVerbalTense", "getVerbs", "getAvailableVerbalTenses", "getCurrentIndex"]),
-		verb: function () {
-			return this.getCurrentVerbalTense?.name.trim();
-		},
-		translation: function () {
-			return this.getCurrentVerbalTense?.translation?.trim();
-		},
+		...mapGetters(["getPoints", "getVerbs", "getVerbalTenses", "getCurrentVerbalTense", "getVerbs", "getAvailableVerbalTenses", "getCurrentIndex"]),
 		index: function () {
 			return this.getCurrentIndex;
 		}
@@ -58,7 +52,7 @@ export default {
 		return {
 			verbalTenses: [],
 			verbs: [],
-			currentVerbalTense: {}
+			currentVerbalTense: ""
 		};
 	},
 	methods: {

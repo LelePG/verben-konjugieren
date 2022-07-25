@@ -31,7 +31,7 @@ export default new Vuex.Store({
       return state.auxVerb
     },
     getCurrentVerbalTense : function(state){
-      return state.verbalTenses[state.currentIndex]
+      return state.verbalTenses[state.currentIndex].trim()
     },
     getAvailableVerbalTenses : function(state){
       return state.verbalTenses.length -1

@@ -4,7 +4,8 @@
 			<h5 class="m-0">{{ verb.name }} - {{ verb.translation }}</h5>
 			<i class="far fa-lightbulb d-float float-right ml-1" @click="showAnswer = !showAnswer"></i>
 		</div>
-		<ul>
+		<p v-if="error">{{ error }}</p>
+		<ul v-else>
 			<PersonConjugation person="ich" :answer="verbalPeople.ich.conjugation" :showAnswer="showAnswer"
 				:correctConjugation="verifyAnswers" />
 			<PersonConjugation person="du" :answer="verbalPeople.du.conjugation" :showAnswer="showAnswer"
@@ -37,6 +38,7 @@ export default {
 		return {
 			verifyAnswers: false,
 			showAnswer: false,
+			error: "",
 			verbalPeople: {
 				ich: { person: 1, number: "S" },
 				du: { person: 2, number: "S" },
@@ -51,7 +53,7 @@ export default {
 		...mapGetters(["getAuxVerb", "getCurrentVerbalTense"]),
 		auxVerb: function () {
 			return this.getAuxVerb
-		}
+		},
 	},
 	watch: {
 		'getCurrentVerbalTense': function () {
@@ -68,8 +70,8 @@ export default {
 				for (let verbalPerson of Object.values(this.verbalPeople)) {
 					const conjugationFromAPI = GermanVerbsLib.getConjugation(
 						GermanVerbsDict,
-						this.verb.name,
-						this.verbalTense,
+						this.verb.name.trim(),
+						this.verbalTense.trim(),
 						verbalPerson.person,
 						verbalPerson.number,
 						this.auxVerb
@@ -77,7 +79,8 @@ export default {
 					verbalPerson.conjugation = conjugationFromAPI;
 				}
 			} catch (e) {
-				console.log(e);
+				this.error = `Houve um problema com o verbo ${this.verb.name} e ele não pode ser conjugado.\nVerifique a digitação dele na tela inicial e tente novamente.`
+				console.log(e)
 			}
 		},
 	},

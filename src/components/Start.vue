@@ -93,8 +93,15 @@ export default {
 				return;
 			}
 			const index = this.verbalSetsWithNames.indexOf(this.verbalSet);
-			let selectedSet = sets[index];
+			let selectedSet
 
+			if (this.verbsToBeUsed === "default") {
+				selectedSet = sets[index];
+			} else {
+				selectedSet = this.customSet.split(",").map((element) => {
+					return { name: element, translation: "" }
+				})
+			}
 			await this.$store.commit("setVerbalTenses", this.verbalTenses);
 			await this.$store.commit("setAuxVerb", this.auxVerb);
 			await this.$store.commit("setVerbs", selectedSet);
