@@ -5,9 +5,13 @@
 			<h3>Pontos: {{ getPoints }}</h3>
 		</div>
 		<v-container>
-			<v-row>
+			<v-row v-if="getVisualizationStyle === 'conjugations'">
 				<Conjugations v-for="verbalTense in verbalTenses" :key="verbalTense" :verbalTense="verbalTense" />
 			</v-row>
+
+			<!-- <v-row v-if="getVisualizationStyle === 'verbs'">
+				<Conjugations v-for="verb in getVerbs" :key="verb" :verbalTense="verbalTense[index]" />
+			</v-row> -->
 		</v-container>
 		<div class="text-center">
 			<CharButton char="ß" />
@@ -41,7 +45,7 @@ export default {
 		CharButton,
 	},
 	computed: {
-		...mapGetters(["getPoints", "getVerbalTenses", "getCurrentVerb", "getAvailableVerbs", "getCurrentIndex"]),
+		...mapGetters(["getPoints", "getVerbalTenses", "getCurrentVerb", "getVerbs", "getAvailableVerbs", "getCurrentIndex", "getVisualizationStyle"]),
 		verb: function () {
 			return this.getCurrentVerb?.name.trim();
 		},
@@ -55,7 +59,7 @@ export default {
 	data: function () {
 		return {
 			verbalTenses: [],
-			currentVerb: {},
+			currentVerb: {}
 		};
 	},
 	methods: {

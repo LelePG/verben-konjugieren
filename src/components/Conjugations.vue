@@ -33,11 +33,10 @@ export default {
 	components: {
 		PersonConjugation,
 	},
-	data: function() {
+	data: function () {
 		return {
 			verifyAnswers: false,
 			showAnswer: false,
-			auxVerb: this.getAuxVerb,
 			verbalPeople: {
 				ich: { person: 1, number: "S" },
 				du: { person: 2, number: "S" },
@@ -50,22 +49,25 @@ export default {
 	},
 	computed: {
 		...mapGetters(["getAuxVerb", "getCurrentVerb"]),
-		verb: function(){
+		verb: function () {
 			let verb = this.getCurrentVerb.name
 			return verb;
 		},
+		auxVerb: function () {
+			return this.getAuxVerb
+		}
 	},
-	watch:{
-		'getCurrentVerb': function(){
-			this.showAnswer=false
+	watch: {
+		'getCurrentVerb': function () {
+			this.showAnswer = false
 			this.updateVerb()
 		}
 	},
 	methods: {
-		verificaResposta: function() {
+		verificaResposta: function () {
 			this.verifyAnswers = !this.verifyAnswers;
 		},
-		updateVerb: function() {
+		updateVerb: function () {
 			try {
 				for (let verbalPerson of Object.values(this.verbalPeople)) {
 					const conjugationFromAPI = GermanVerbsLib.getConjugation(
@@ -83,7 +85,7 @@ export default {
 			}
 		},
 	},
-	created: function() {
+	created: function () {
 		this.updateVerb();
 	}
 };

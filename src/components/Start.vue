@@ -41,6 +41,14 @@
 		</b-form-select>
 		<b-form-input v-if="verbsToBeUsed === 'custom'" v-model="customSet"
 			placeholder="Digite verbos separados por vírgula"></b-form-input>
+
+		<h3>Como quer visualizar os elementos</h3>
+		<b-form-group label="Selecione uma das opções">
+			<b-form-radio v-model="visualization" value="verbs">Todos os verbos na mesma tela
+			</b-form-radio>
+			<b-form-radio v-model="visualization" value="conjugations">Todos os tempos na mesma tela
+			</b-form-radio>
+		</b-form-group>
 		<router-link to="/play" event="" @click.native="loadInfo()" class="w-75 mt-3">
 			<b-button class="bg-secondary w-100" v-b-hover="">Iniciar </b-button>
 		</router-link>
@@ -76,11 +84,12 @@ export default {
 			],
 			auxVerb: "SEIN",
 			verbsToBeUsed: "",
-			customSet: ""
+			customSet: "",
+			visualization: ""
 		};
 	},
 	methods: {
-		...mapMutations[("setVerbalTenses", "setAuxVerb", "setVerbs", "clearCurrentIndex")],
+		...mapMutations[("setVerbalTenses", "setAuxVerb", "setVerbs", "clearCurrentIndex", "setVisualizationStyle")],
 		loadInfo: async function () {
 			if (!this.verbalTenses.length) {
 				window.alert("Você precisa selecionar pelo menos um tempo.");
@@ -100,13 +109,13 @@ export default {
 			} else if (this.verbsToBeUsed === 'custom') {
 				selectedSet = this.customSet.split(",").map(el => { return { name: el, translation: "sem tradução" } });
 			}
-			console.log(this.verbsToBeUsed)
-			console.log(selectedSet)
 
+			console.log(this.visualization)
 			await this.$store.commit("setVerbalTenses", this.verbalTenses);
 			await this.$store.commit("setAuxVerb", this.auxVerb);
 			await this.$store.commit("setVerbs", selectedSet);
 			await this.$store.commit("clearCurrentIndex");
+			await this.$store.commit("setVisualizationStyle", this.visualization);
 			this.$router.push("/play");
 		},
 	},

@@ -11,6 +11,7 @@ export default new Vuex.Store({
     verbalTenses: [],
     auxVerb: "",
     currentIndex: 0,
+    visualizationStyle: ""
   },
   getters:{
     getInputWithFocus: function(state){
@@ -37,6 +38,10 @@ export default new Vuex.Store({
     getCurrentIndex : function(state){
       return state.currentIndex
     }, 
+    getVisualizationStyle : function(state){
+      console.log("aaaaaaaaaa" )
+      return state.visualizationStyle
+    },
   },
   mutations: {
     setInputWithFocus: function(state, input) {
@@ -60,6 +65,9 @@ export default new Vuex.Store({
     },
     clearCurrentIndex: function(state){
       state.currentIndex = 0
+    },
+    setVisualizationStyle: function(state, visualizationStyle){
+      state.visualizationStyle = visualizationStyle
     },
   }
 })
