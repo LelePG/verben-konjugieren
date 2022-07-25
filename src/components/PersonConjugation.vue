@@ -7,7 +7,7 @@
 </template>
 
 <script>
-import { mapMutations } from "vuex";
+import { mapMutations, mapGetters } from "vuex";
 
 export default {
 	props: ["person", "answer", "showAnswer", "correctConjugation"],
@@ -18,6 +18,7 @@ export default {
 		};
 	},
 	computed: {
+		...mapGetters(["getCurrentVerb"]),
 		classes: {
 			get() {
 				return this.inputClasses;
@@ -50,8 +51,9 @@ export default {
 			}
 			this.$store.commit("addPoints", score);
 		},
-		answer: function(){
-			console.log("aaa")
+		'getCurrentVerb': function () {
+			this.userInput=""
+			this.classes = this.classes.replace("wrong", "").replace("correct","");
 		}
 	},
 	methods: {
@@ -63,8 +65,8 @@ export default {
 		conjugationIsCorrect() {
 			return this.userInput.toLowerCase().trim() === this.answer.toLowerCase().trim();
 		},
-	}
-};
+	},
+}
 </script>
 
 <style>
