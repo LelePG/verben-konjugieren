@@ -6,17 +6,20 @@
 		<b-form class="pa-2 d-flex justify-content-around w-100">
 			<b-form-group>
 				<h4>Indicativ</h4>
-				<b-form-checkbox v-for="tense in indicativ" v-model="verbalTenses" :value="tense.value" :key="tense.text">{{ tense.text }}</b-form-checkbox>
+				<b-form-checkbox v-for="tense in indicativ" v-model="verbalTenses" :value="tense.value"
+					:key="tense.text">{{ tense.text }}</b-form-checkbox>
 			</b-form-group>
 
 			<b-form-group>
 				<h4>Konjunktiv1</h4>
-				<b-form-checkbox v-for="tense in konjunktiv1" v-model="verbalTenses" :value="tense.value" :key="tense.text">{{ tense.text }}</b-form-checkbox>
+				<b-form-checkbox v-for="tense in konjunktiv1" v-model="verbalTenses" :value="tense.value"
+					:key="tense.text">{{ tense.text }}</b-form-checkbox>
 			</b-form-group>
 
 			<b-form-group>
 				<h4>Konjunktiv2</h4>
-				<b-form-checkbox v-for="tense in konjunktiv2" v-model="verbalTenses" :value="tense.value" :key="tense.text">{{ tense.text }}</b-form-checkbox>
+				<b-form-checkbox v-for="tense in konjunktiv2" v-model="verbalTenses" :value="tense.value"
+					:key="tense.text">{{ tense.text }}</b-form-checkbox>
 			</b-form-group>
 
 			<b-form-group>
@@ -27,8 +30,17 @@
 		</b-form>
 
 		<h3>Selecione um set de verbos</h3>
-		<b-form-select v-model="verbalSet" :options="verbalSetsWithNames" class="w-75"></b-form-select>
-
+		<b-form-group label="Selecione o tipo">
+			<b-form-radio v-model="verbsToBeUsed" value="default">Selecionar sets padrão
+			</b-form-radio>
+			<b-form-radio v-model="verbsToBeUsed" value="custom">Quero usar meus verbos
+			</b-form-radio>
+		</b-form-group>
+		<b-form-select v-if="verbsToBeUsed === 'default'" v-model="verbalSet" :options="verbalSetsWithNames"
+			class="w-75" placeholder="Selecione um set de verbos">
+		</b-form-select>
+		<b-form-input v-if="verbsToBeUsed === 'custom'" v-model="customSet"
+			placeholder="Digite verbos separados por vírgula"></b-form-input>
 		<router-link to="/play" event="" @click.native="loadInfo()" class="w-75 mt-3">
 			<b-button class="bg-secondary w-100" v-b-hover="">Iniciar </b-button>
 		</router-link>
@@ -39,7 +51,7 @@
 import { mapMutations } from "vuex";
 import sets from "./../assets/sets.js";
 export default {
-	data: function() {
+	data: function () {
 		return {
 			verbalTenses: [],
 			verbalSetsWithNames: sets.map((arr) => arr.map((element) => element.name)),
@@ -63,11 +75,13 @@ export default {
 				{ value: "KONJUNKTIV2_FUTUR2", text: "Futur2" },
 			],
 			auxVerb: "SEIN",
+			verbsToBeUsed: "",
+			customSet: ""
 		};
 	},
 	methods: {
-		...mapMutations[("setVerbalTenses", "setAuxVerb", "setVerbs")],
-		loadInfo: async function() {
+		...mapMutations[("setVerbalTenses", "setAuxVerb", "setVerbs", "clearCurrentIndex")],
+		loadInfo: async function () {
 			if (!this.verbalTenses.length) {
 				window.alert("Você precisa selecionar pelo menos um tempo.");
 				return;
@@ -79,11 +93,20 @@ export default {
 				return;
 			}
 			const index = this.verbalSetsWithNames.indexOf(this.verbalSet);
-			const selectedSet = sets[index];
+			console.log(index)
+			let selectedSet;
+			if (this.verbsToBeUsed === 'default') {
+				selectedSet = sets[index];
+			} else if (this.verbsToBeUsed === 'custom') {
+				selectedSet = this.customSet.split(",").map(el => { return { name: el, translation: "sem tradução" } });
+			}
+			console.log(this.verbsToBeUsed)
+			console.log(selectedSet)
 
 			await this.$store.commit("setVerbalTenses", this.verbalTenses);
 			await this.$store.commit("setAuxVerb", this.auxVerb);
 			await this.$store.commit("setVerbs", selectedSet);
+			await this.$store.commit("clearCurrentIndex");
 			this.$router.push("/play");
 		},
 	},

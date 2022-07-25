@@ -52,10 +52,14 @@ export default new Vuex.Store({
       state.auxVerb = auxVerb
     },
     setVerbs: function(state, verbs){
+      console.log(verbs)
       state.verbs = verbs
     },
     setCurrentIndex: function(state, currentIndex){
       state.currentIndex = currentIndex >=0 ? state.currentIndex+1: state.currentIndex-1
+    },
+    clearCurrentIndex: function(state){
+      state.currentIndex = 0
     },
   }
 })

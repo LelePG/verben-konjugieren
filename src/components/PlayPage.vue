@@ -25,9 +25,7 @@
 			</router-link>
 			<v-btn v-if="index > 0" class="bg-warning mx-2 my-1" @click="decrementIndex">Anterior</v-btn>
 			<v-btn v-if="index < getAvailableVerbs" class="bg-warning mx-2 my-1" @click="incrementIndex">Próximo</v-btn>
-			<a href="/play">
-				<v-btn class="bg-warning mx-2 my-3">Recarregar</v-btn>
-			</a>
+			<v-btn class="bg-warning mx-2 my-3" @click="clearAnswers">Limpar</v-btn>
 		</div>
 	</v-card>
 </template>
@@ -44,36 +42,40 @@ export default {
 	},
 	computed: {
 		...mapGetters(["getPoints", "getVerbalTenses", "getCurrentVerb", "getAvailableVerbs", "getCurrentIndex"]),
-		verb: function() {
+		verb: function () {
 			return this.getCurrentVerb?.name.trim();
 		},
-		translation: function() {
-			return this.getCurrentVerb?.translation.trim();
+		translation: function () {
+			return this.getCurrentVerb?.translation?.trim();
 		},
-		index: function(){
+		index: function () {
 			return this.getCurrentIndex;
 		}
 	},
-	data: function() {
+	data: function () {
 		return {
 			verbalTenses: [],
-			currentVerb:{},
+			currentVerb: {},
 		};
 	},
-	methods:{
+	methods: {
 		...mapMutations(["setCurrentIndex"]),
-		incrementIndex: function(){
+		incrementIndex: function () {
 			this.$store.commit("setCurrentIndex", +1);
 		},
 		decrementIndex: function () {
 			this.$store.commit("setCurrentIndex", -1);
+		},
+		clearAnswers: function () {
+			this.decrementIndex();
+			this.incrementIndex();
 		}
 	},
-	created: function() {
+	created: function () {
 		this.currentVerb = this.getCurrentVerb;
 		this.verbalTenses = this.getVerbalTenses;
 	},
-	updated: function(){
+	updated: function () {
 		this.currentVerb = this.getCurrentVerb;
 	}
 };
