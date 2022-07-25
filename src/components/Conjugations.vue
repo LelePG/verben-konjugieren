@@ -1,7 +1,7 @@
 <template>
 	<div class="conjugations m-2 p-3 text-dark rounded-lg border-primary border-with-width-lg custom-width">
 		<div class="text-dark d-inline-flex w-100 justify-content-between align-items-center">
-			<h5 class="m-0">{{ verbalTense }}</h5>
+			<h5 class="m-0">{{ verb.name }} - {{ verb.translation }}</h5>
 			<i class="far fa-lightbulb d-float float-right ml-1" @click="showAnswer = !showAnswer"></i>
 		</div>
 		<ul>
@@ -29,7 +29,7 @@ import { mapGetters } from "vuex";
 import PersonConjugation from "./PersonConjugation.vue";
 
 export default {
-	props: ["verbalTense"],
+	props: ["verbalTense", "verb"],
 	components: {
 		PersonConjugation,
 	},
@@ -48,17 +48,13 @@ export default {
 		};
 	},
 	computed: {
-		...mapGetters(["getAuxVerb", "getCurrentVerb"]),
-		verb: function () {
-			let verb = this.getCurrentVerb.name
-			return verb;
-		},
+		...mapGetters(["getAuxVerb", "getCurrentVerbalTense"]),
 		auxVerb: function () {
 			return this.getAuxVerb
 		}
 	},
 	watch: {
-		'getCurrentVerb': function () {
+		'getCurrentVerbalTense': function () {
 			this.showAnswer = false
 			this.updateVerb()
 		}
@@ -72,7 +68,7 @@ export default {
 				for (let verbalPerson of Object.values(this.verbalPeople)) {
 					const conjugationFromAPI = GermanVerbsLib.getConjugation(
 						GermanVerbsDict,
-						this.verb,
+						this.verb.name,
 						this.verbalTense,
 						verbalPerson.person,
 						verbalPerson.number,

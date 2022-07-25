@@ -2,7 +2,8 @@
 	<li class="text-dark d-flex justify-content-between m-1 w-100">
 		<label class="mr-2">{{ person }}</label>
 		<input v-if="showAnswer" type="text" :name="person" :placeholder="answer" disabled :class="inputClasses" />
-		<input v-else type="text" :name="person" @focus="changeInputWithFocus" v-model="userInput" :class="inputClasses" />
+		<input v-else type="text" :name="person" @focus="changeInputWithFocus" v-model="userInput"
+			:class="inputClasses" />
 	</li>
 </template>
 
@@ -11,14 +12,14 @@ import { mapMutations, mapGetters } from "vuex";
 
 export default {
 	props: ["person", "answer", "showAnswer", "correctConjugation"],
-	data: function() {
+	data: function () {
 		return {
 			userInput: "",
 			inputClasses: "border-with-width-sm border-3 border-primary rounded-lg pl-1 custom-width-input",
 		};
 	},
 	computed: {
-		...mapGetters(["getCurrentVerb"]),
+		...mapGetters(["getCurrentVerbalTense"]),
 		classes: {
 			get() {
 				return this.inputClasses;
@@ -29,7 +30,7 @@ export default {
 		},
 	},
 	watch: {
-		correctConjugation: function() {
+		correctConjugation: function () {
 			const isAlreadyCorrect = this.classes.includes(" correct");
 			const isAlreadyWrong = this.classes.includes(" wrong");
 			if (isAlreadyCorrect) {
@@ -51,14 +52,14 @@ export default {
 			}
 			this.$store.commit("addPoints", score);
 		},
-		'getCurrentVerb': function () {
-			this.userInput=""
-			this.classes = this.classes.replace("wrong", "").replace("correct","");
+		'getCurrentVerbalTense': function () {
+			this.userInput = ""
+			this.classes = this.classes.replace("wrong", "").replace("correct", "");
 		}
 	},
 	methods: {
 		...mapMutations(["setInputWithFocus, addPoints"]),
-		changeInputWithFocus: function() {
+		changeInputWithFocus: function () {
 			const focusedInput = this.$el.querySelector(`input[type="text"]`);
 			this.$store.commit("setInputWithFocus", focusedInput);
 		},

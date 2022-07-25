@@ -1,17 +1,14 @@
 <template>
 	<v-card class="bg-light pa-2">
 		<div class="d-flex flex-column align-items-center text-dark pt-2">
-			<h2>O verbo é {{ verb }} - {{ translation }}</h2>
+			<h2>O tempo é {{ getVerbalTenses[index] }}</h2>
 			<h3>Pontos: {{ getPoints }}</h3>
 		</div>
 		<v-container>
-			<v-row v-if="getVisualizationStyle === 'conjugations'">
-				<Conjugations v-for="verbalTense in verbalTenses" :key="verbalTense" :verbalTense="verbalTense" />
+			<v-row>
+				<Conjugations v-for="verb in verbs" :key="verb.name" :verb="verb" :verbalTense="verbalTenses[index]" />
 			</v-row>
 
-			<!-- <v-row v-if="getVisualizationStyle === 'verbs'">
-				<Conjugations v-for="verb in getVerbs" :key="verb" :verbalTense="verbalTense[index]" />
-			</v-row> -->
 		</v-container>
 		<div class="text-center">
 			<CharButton char="ß" />
@@ -28,7 +25,8 @@
 				<v-btn class="bg-warning mx-2 my-1">Voltar</v-btn>
 			</router-link>
 			<v-btn v-if="index > 0" class="bg-warning mx-2 my-1" @click="decrementIndex">Anterior</v-btn>
-			<v-btn v-if="index < getAvailableVerbs" class="bg-warning mx-2 my-1" @click="incrementIndex">Próximo</v-btn>
+			<v-btn v-if="index < getAvailableVerbalTenses" class="bg-warning mx-2 my-1" @click="incrementIndex">Próximo
+			</v-btn>
 			<v-btn class="bg-warning mx-2 my-3" @click="clearAnswers">Limpar</v-btn>
 		</div>
 	</v-card>
@@ -45,12 +43,12 @@ export default {
 		CharButton,
 	},
 	computed: {
-		...mapGetters(["getPoints", "getVerbalTenses", "getCurrentVerb", "getVerbs", "getAvailableVerbs", "getCurrentIndex", "getVisualizationStyle"]),
+		...mapGetters(["getPoints", "getVerbalTenses", "getCurrentVerbalTense", "getVerbs", "getAvailableVerbalTenses", "getCurrentIndex"]),
 		verb: function () {
-			return this.getCurrentVerb?.name.trim();
+			return this.getCurrentVerbalTense?.name.trim();
 		},
 		translation: function () {
-			return this.getCurrentVerb?.translation?.trim();
+			return this.getCurrentVerbalTense?.translation?.trim();
 		},
 		index: function () {
 			return this.getCurrentIndex;
@@ -59,7 +57,8 @@ export default {
 	data: function () {
 		return {
 			verbalTenses: [],
-			currentVerb: {}
+			verbs: [],
+			currentVerbalTense: {}
 		};
 	},
 	methods: {
@@ -76,11 +75,12 @@ export default {
 		}
 	},
 	created: function () {
-		this.currentVerb = this.getCurrentVerb;
-		this.verbalTenses = this.getVerbalTenses;
+		this.currentVerbalTense = this.getCurrentVerbalTense;
+		this.verbs = this.getVerbs
+		this.verbalTenses = this.getVerbalTenses
 	},
 	updated: function () {
-		this.currentVerb = this.getCurrentVerb;
+		this.currentVerbalTense = this.getCurrentVerbalTense;
 	}
 };
 </script>

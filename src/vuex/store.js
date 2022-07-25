@@ -11,7 +11,8 @@ export default new Vuex.Store({
     verbalTenses: [],
     auxVerb: "",
     currentIndex: 0,
-    visualizationStyle: ""
+    visualizationStyle: "",
+    currentArray:[]
   },
   getters:{
     getInputWithFocus: function(state){
@@ -29,19 +30,15 @@ export default new Vuex.Store({
     getAuxVerb : function(state){
       return state.auxVerb
     },
-    getCurrentVerb : function(state){
-      return state.verbs[state.currentIndex]
+    getCurrentVerbalTense : function(state){
+      return state.verbalTenses[state.currentIndex]
     },
-    getAvailableVerbs : function(state){
-      return state.verbs.length -1
+    getAvailableVerbalTenses : function(state){
+      return state.verbalTenses.length -1
     }, 
     getCurrentIndex : function(state){
       return state.currentIndex
     }, 
-    getVisualizationStyle : function(state){
-      console.log("aaaaaaaaaa" )
-      return state.visualizationStyle
-    },
   },
   mutations: {
     setInputWithFocus: function(state, input) {
@@ -57,7 +54,6 @@ export default new Vuex.Store({
       state.auxVerb = auxVerb
     },
     setVerbs: function(state, verbs){
-      console.log(verbs)
       state.verbs = verbs
     },
     setCurrentIndex: function(state, currentIndex){
@@ -66,8 +62,8 @@ export default new Vuex.Store({
     clearCurrentIndex: function(state){
       state.currentIndex = 0
     },
-    setVisualizationStyle: function(state, visualizationStyle){
-      state.visualizationStyle = visualizationStyle
+    clearPoints: function(state){
+      state.points = 0
     },
   }
 })
