@@ -1,5 +1,5 @@
 <template>
-	<div class="conjugations m-2 p-3 text-dark rounded-lg border-primary border-with-width-lg custom-width">
+	<div class="conjugations mx-2 my-3 p-3 text-dark rounded-lg border-primary border-with-width-lg custom-width">
 		<div class="text-dark d-inline-flex w-100 justify-content-between align-items-center">
 			<h5 class="m-0">{{ verb.name }} - {{ verb.translation }}</h5>
 			<i class="far fa-lightbulb d-float float-right ml-1" @click="showAnswer = !showAnswer"></i>
@@ -19,7 +19,7 @@
 			<PersonConjugation person="sie/Sie" :answer="verbalPeople.sie.conjugation" :showAnswer="showAnswer"
 				:correctConjugation="verifyAnswers" />
 		</ul>
-		<v-btn color="#B7B7A4" block @click="verificaResposta"> Verificar </v-btn>
+		<v-btn class="bg-primary" block @click="verificaResposta"> Verificar </v-btn>
 	</div>
 </template>
 

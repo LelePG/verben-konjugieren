@@ -1,5 +1,6 @@
 <template>
-	<button class="bg-warning py-1 px-3 rounded-lg mx-1 my-1" @click="insertCaracter()">{{ this.char }}</button>
+	<button class="bg-primary text-dark py-1 px-3 rounded-lg mx-1 my-1" @click="insertCaracter()">{{ this.char
+	}}</button>
 </template>
 
 <script>
@@ -10,7 +11,7 @@ export default {
 		...mapGetters(["getInputWithFocus"]),
 	},
 	methods: {
-		insertCaracter: function() {
+		insertCaracter: function () {
 			const inputWithFocus = this.getInputWithFocus;
 			inputWithFocus.value += this.char;
 			inputWithFocus.focus();

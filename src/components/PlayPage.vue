@@ -1,15 +1,12 @@
 <template>
-	<v-card class="bg-light pa-2">
+	<div class="bg-light ">
 		<div class="d-flex flex-column align-items-center text-dark pt-2">
-			<h2>O tempo é {{ getCurrentVerbalTense }}</h2>
-			<h3>Pontos: {{ getPoints }}</h3>
+			<h4 class="text-sm-center">O tempo é {{ getCurrentVerbalTense }}</h4>
+			<h5>Pontos: {{ getPoints }}</h5>
 		</div>
-		<v-container>
-			<v-row>
-				<Conjugations v-for="verb in verbs" :key="verb.name" :verb="verb" :verbalTense="verbalTenses[index]" />
-			</v-row>
-
-		</v-container>
+		<div class="p-0 m-auto d-flex justify-content-around flex-wrap">
+			<Conjugations v-for="verb in verbs" :key="verb.name" :verb="verb" :verbalTense="verbalTenses[index]" />
+		</div>
 		<div class="text-center">
 			<CharButton char="ß" />
 			<CharButton char="ä" />
@@ -22,14 +19,15 @@
 
 		<div class="text-center">
 			<router-link to="/">
-				<v-btn class="bg-warning mx-2 my-1">Voltar</v-btn>
+				<v-btn class="bg-primary text-dark mx-2 my-1">Voltar</v-btn>
 			</router-link>
-			<v-btn v-if="index > 0" class="bg-warning mx-2 my-1" @click="decrementIndex">Anterior</v-btn>
-			<v-btn v-if="index < getAvailableVerbalTenses" class="bg-warning mx-2 my-1" @click="incrementIndex">Próximo
+			<v-btn v-if="index > 0" class="bg-primary text-dark mx-2 my-1" @click="decrementIndex">Anterior</v-btn>
+			<v-btn v-if="index < getAvailableVerbalTenses" class="bg-primary text-dark mx-2 my-1"
+				@click="incrementIndex">Próximo
 			</v-btn>
-			<v-btn class="bg-warning mx-2 my-3" @click="clearAnswers">Limpar</v-btn>
+			<v-btn class="bg-primary text-dark mx-2 my-3" @click="clearAnswers">Limpar</v-btn>
 		</div>
-	</v-card>
+	</div>
 </template>
 
 <script>
