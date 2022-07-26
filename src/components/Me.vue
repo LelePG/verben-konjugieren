@@ -1,15 +1,16 @@
 <template>
-    <div id="my-info" class="d-flex flex-column justify-content-center align-items-center">
+    <div id="my-info" class="d-flex flex-column justify-content-center">
         <img id="me" src="../assets/leticia.jpg">
-        <b-popover target="me" triggers="hover" placement="rigthbottom" custom-class="popover-info">
+        <div class="popover-info hidden">
             <h2 class="text-center">Hallo!!</h2>
-            <p class="text-justify">Olá! Eu sou a Letícia, e este é o projeto Verben Konjugieren. Este projeto tem o
+            <p class="text-justify flex-grow-1">Olá! Eu sou a Letícia, e este é o projeto Verben Konjugieren. Este
+                projeto tem o
                 intuito de ajudar na
                 prática de conjugações de verbos em alemão, e você pode selecionar alguns sets de verbos e tempos
                 verbais
                 para praticar, ou inserir seus próprios verbos.
             </p>
-            <p class="text-justify">Sentro da aplicação, você pode ver a resposta da conjugação dos verbos e
+            <p class="text-justify">Dentro da aplicação, você pode ver a resposta da conjugação dos verbos e
                 verificar
                 se o que você digitou
                 está
@@ -30,7 +31,7 @@
             <hr />
             <span>Desenho por <a target="_blank" href="https://www.instagram.com/rbmaya_art/">@rbmaya_art</a>
             </span>
-        </b-popover>
+        </div>
     </div>
 
 </template>
@@ -52,20 +53,36 @@ export default {
 
 <style scoped>
 div#my-info {
-    max-width: 150px;
     font-size: 0.8rem;
-    text-align: center;
+    text-align: left;
+    position: relative;
 }
 
 #me {
     width: 70px;
     border-radius: 20%;
+    margin-left: 20px;
+}
+
+#me:hover+.popover-info,
+.popover-info:hover {
+    display: block;
+    position: absolute;
+    z-index: 10;
+    top: 72px;
+    left: 30px;
 }
 
 .popover-info {
-    background-color: #e2dfdd;
+    background-color: #cebcb0;
     padding: 10px 15px;
     color: #3c271f;
+    border-radius: 10px;
+    min-width: 250px;
+}
+
+.hidden {
+    display: none;
 }
 
 .logo {
