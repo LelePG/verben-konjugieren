@@ -1,6 +1,5 @@
 import Vue from "vue";
 import App from "./App.vue";
-import vuetify from "./plugins/vuetify";
 import store from "./vuex/store.js";
 import router from "./router/router.js";
 import { BootstrapVue, IconsPlugin } from "bootstrap-vue";
@@ -14,7 +13,6 @@ Vue.use(IconsPlugin);
 Vue.config.productionTip = false;
 
 new Vue({
-	vuetify,
 	store,
 	router,
 	BootstrapVue,

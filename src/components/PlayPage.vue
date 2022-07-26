@@ -19,13 +19,14 @@
 
 		<div class="text-center">
 			<router-link to="/">
-				<v-btn class="bg-primary text-dark mx-2 my-1">Voltar</v-btn>
+				<b-button class="bg-primary text-dark mx-2 my-1">Voltar</b-button>
 			</router-link>
-			<v-btn v-if="index > 0" class="bg-primary text-dark mx-2 my-1" @click="decrementIndex">Anterior</v-btn>
-			<v-btn v-if="index < getAvailableVerbalTenses" class="bg-primary text-dark mx-2 my-1"
+			<b-button v-if="index > 0" class="bg-primary text-dark mx-2 my-1" @click="decrementIndex">Anterior
+			</b-button>
+			<b-button v-if="index < getAvailableVerbalTenses" class="bg-primary text-dark mx-2 my-1"
 				@click="incrementIndex">Próximo
-			</v-btn>
-			<v-btn class="bg-primary text-dark mx-2 my-3" @click="clearAnswers">Limpar</v-btn>
+			</b-button>
+			<b-button class="bg-primary text-dark mx-2 my-3" @click="clearAnswers">Limpar</b-button>
 		</div>
 	</div>
 </template>

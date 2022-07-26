@@ -19,7 +19,8 @@
 			<PersonConjugation person="sie/Sie" :answer="verbalPeople.sie.conjugation" :showAnswer="showAnswer"
 				:correctConjugation="verifyAnswers" />
 		</ul>
-		<v-btn class="bg-primary" block @click="verificaResposta"> Verificar </v-btn>
+		<b-button v-if="!error" class="bg-primary text-dark" block @click="verificaResposta"> Verificar
+		</b-button>
 	</div>
 </template>
 
@@ -97,6 +98,7 @@ export default {
 
 .custom-width {
 	width: auto;
+	max-width: 300px;
 }
 
 ul {
