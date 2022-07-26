@@ -32,5 +32,5 @@ Isso irá executar servidor de desenvolvimento, e rodará a aplicação em uma d
 ## Links úteis
 - [Pacote German Verbs](https://www.npmjs.com/package/german-verbs)
 - [Pacote German Verbs Dict](https://www.npmjs.com/package/german-verbs-dict)
-- [@rbmaya_art]("https://www.instagram.com/rbmaya_art/") - artista responsável pelo desenho
+- [@rbmaya_art](https://www.instagram.com/rbmaya_art/) - artista responsável pelo desenho
 
