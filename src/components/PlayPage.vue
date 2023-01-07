@@ -26,7 +26,6 @@
 			<b-button v-if="index < getAvailableVerbalTenses" class="bg-primary text-dark mx-2 my-1"
 				@click="incrementIndex">Próximo
 			</b-button>
-			<b-button class="bg-primary text-dark mx-2 my-3" @click="clearAnswers">Limpar</b-button>
 		</div>
 	</div>
 </template>
@@ -62,10 +61,6 @@ export default {
 		decrementIndex: function () {
 			this.$store.commit("setCurrentIndex", -1);
 		},
-		clearAnswers: function () {
-			this.decrementIndex();
-			this.incrementIndex();
-		}
 	},
 	created: function () {
 		this.currentVerbalTense = this.getCurrentVerbalTense;

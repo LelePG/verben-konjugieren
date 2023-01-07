@@ -4,6 +4,7 @@ import store from "./vuex/store.js";
 import router from "./router/router.js";
 import { BootstrapVue, IconsPlugin } from "bootstrap-vue";
 import "./styles/custom.scss";
+import vuetify from './plugins/vuetify'
 // import 'bootstrap/dist/css/bootstrap.css'
 // import 'bootstrap-vue/dist/bootstrap-vue.css'
 
@@ -13,9 +14,10 @@ Vue.use(IconsPlugin);
 Vue.config.productionTip = false;
 
 new Vue({
-	store,
-	router,
-	BootstrapVue,
-	IconsPlugin,
-	render: (h) => h(App),
+    store,
+    router,
+    BootstrapVue,
+    IconsPlugin,
+    vuetify,
+    render: (h) => h(App)
 }).$mount("#app");
