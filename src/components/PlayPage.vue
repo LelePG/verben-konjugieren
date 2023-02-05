@@ -1,11 +1,11 @@
 <template>
 	<div class="bg-light ">
 		<div class="d-flex flex-column align-items-center text-dark pt-2">
-			<h4 class="text-sm-center">O tempo é {{ getCurrentVerbalTense }}</h4>
+			<h4 class="text-sm-center">O tempo é {{ currentVerbalTense.text }}</h4>
 			<h5>Pontos: {{ getPoints }}</h5>
 		</div>
 		<div class="p-0 m-auto d-flex justify-content-around flex-wrap">
-			<Conjugations v-for="verb in verbs" :key="verb.name" :verb="verb" :verbalTense="verbalTenses[index]" />
+			<Conjugations v-for="verb in verbs" :key="verb.name" :verb="verb" :verbalTense="currentVerbalTense.value" />
 		</div>
 		<div class="text-center">
 			<CharButton char="ß" />
@@ -50,7 +50,7 @@ export default {
 		return {
 			verbalTenses: [],
 			verbs: [],
-			currentVerbalTense: ""
+			currentVerbalTense:{}
 		};
 	},
 	methods: {

@@ -5,7 +5,6 @@ Vue.use(Vuex)
 
 export default new Vuex.Store({
   state: {
-    inputWithFocus: "",
     verbs: [],
     points : 0,
     verbalTenses: [],
@@ -15,9 +14,6 @@ export default new Vuex.Store({
     currentArray:[]
   },
   getters:{
-    getInputWithFocus: function(state){
-      return state.inputWithFocus
-    },
     getPoints: function(state){
       return state.points
     },
@@ -31,7 +27,7 @@ export default new Vuex.Store({
       return state.auxVerb
     },
     getCurrentVerbalTense : function(state){
-      return state.verbalTenses[state.currentIndex].trim()
+      return state.verbalTenses[state.currentIndex]
     },
     getAvailableVerbalTenses : function(state){
       return state.verbalTenses.length -1
@@ -41,9 +37,6 @@ export default new Vuex.Store({
     }, 
   },
   mutations: {
-    setInputWithFocus: function(state, input) {
-     state.inputWithFocus = input
-    },
     addPoints: function(state, points){
       state.points += points
     },

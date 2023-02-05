@@ -13,18 +13,18 @@
 		</div>
 		<p v-if="error">{{ error }}</p>
 		<ul v-else>
-			<PersonConjugation person="ich" :answer="verbalPeople.ich.conjugation" :showAnswer="showAnswer"
-				:correctConjugation="verifyAnswers" />
-			<PersonConjugation person="du" :answer="verbalPeople.du.conjugation" :showAnswer="showAnswer"
-				:correctConjugation="verifyAnswers" />
-			<PersonConjugation person="er/sie/es" :answer="verbalPeople.es.conjugation" :showAnswer="showAnswer"
-				:correctConjugation="verifyAnswers" />
-			<PersonConjugation person="wir" :answer="verbalPeople.wir.conjugation" :showAnswer="showAnswer"
-				:correctConjugation="verifyAnswers" />
-			<PersonConjugation person="ihr" :answer="verbalPeople.ihr.conjugation" :showAnswer="showAnswer"
-				:correctConjugation="verifyAnswers" />
-			<PersonConjugation person="sie/Sie" :answer="verbalPeople.sie.conjugation" :showAnswer="showAnswer"
-				:correctConjugation="verifyAnswers" />
+			<PersonConjugation id=0 person="ich" :answer="verbalPeople.ich.conjugation" :showAnswer="showAnswer"
+				:correctConjugation="verifyAnswers" :changeFocusToNextInput="changeFocusToNextInput" />
+			<PersonConjugation id=1 person="du" :answer="verbalPeople.du.conjugation" :showAnswer="showAnswer"
+				:correctConjugation="verifyAnswers" :changeFocusToNextInput="changeFocusToNextInput" />
+			<PersonConjugation id=2 person="er/sie/es" :answer="verbalPeople.es.conjugation" :showAnswer="showAnswer"
+				:correctConjugation="verifyAnswers" :changeFocusToNextInput="changeFocusToNextInput" />
+			<PersonConjugation id=3 person="wir" :answer="verbalPeople.wir.conjugation" :showAnswer="showAnswer"
+				:correctConjugation="verifyAnswers" :changeFocusToNextInput="changeFocusToNextInput" />
+			<PersonConjugation id=4 person="ihr" :answer="verbalPeople.ihr.conjugation" :showAnswer="showAnswer"
+				:correctConjugation="verifyAnswers" :changeFocusToNextInput="changeFocusToNextInput" />
+			<PersonConjugation id=5 person="sie/Sie" :answer="verbalPeople.sie.conjugation" :showAnswer="showAnswer"
+				:correctConjugation="verifyAnswers" :changeFocusToNextInput="changeFocusToNextInput" />
 		</ul>
 		<b-button v-if="!error" class="bg-primary text-dark" block @click="verificaResposta"> Verificar
 		</b-button>
@@ -79,7 +79,7 @@ export default {
 					const conjugationFromAPI = GermanVerbsLib.getConjugation(
 						GermanVerbsDict,
 						this.verb.name.trim(),
-						this.verbalTense.trim(),
+						this.verbalTense,
 						verbalPerson.person,
 						verbalPerson.number,
 						this.auxVerb
@@ -89,6 +89,20 @@ export default {
 			} catch (e) {
 				this.error = `Houve um problema com o verbo ${this.verb.name} e ele não pode ser conjugado.\nVerifique a digitação dele na tela inicial e tente novamente.`
 				console.log(e)
+			}
+		},
+		changeFocusToNextInput: function (e) {
+			let id = +e.target.id
+			const allInputs = this.$el.querySelectorAll("input");
+			console.log(allInputs)
+			if (e.code === "ArrowDown") {
+				if (id >= 0 && id < allInputs.length - 1) {
+					allInputs[id + 1].focus()
+				}
+			} else if (e.code === "ArrowUp") {
+				if (id > 0 && id < allInputs.length) {
+					allInputs[id - 1].focus();
+				}
 			}
 		},
 	},

@@ -6,19 +6,19 @@
 		<b-form class="pa-2 d-flex justify-content-around w-100 ">
 			<b-form-group class="p-2">
 				<h4>Indicativ</h4>
-				<b-form-checkbox v-for="tense in indicativ" v-model="verbalTenses" :value="tense.value"
+				<b-form-checkbox v-for="tense in indicativ" v-model="verbalTenses" :value="tense"
 					:key="tense.text">{{ tense.text }}</b-form-checkbox>
 			</b-form-group>
 
 			<b-form-group class="p-2">
 				<h4>Konjunktiv1</h4>
-				<b-form-checkbox v-for="tense in konjunktiv1" v-model="verbalTenses" :value="tense.value"
+				<b-form-checkbox v-for="tense in konjunktiv1" v-model="verbalTenses" :value="tense"
 					:key="tense.text">{{ tense.text }}</b-form-checkbox>
 			</b-form-group>
 
 			<b-form-group class="p-2">
 				<h4>Konjunktiv2</h4>
-				<b-form-checkbox v-for="tense in konjunktiv2" v-model="verbalTenses" :value="tense.value"
+				<b-form-checkbox v-for="tense in konjunktiv2" v-model="verbalTenses" :value="tense"
 					:key="tense.text">{{ tense.text }}</b-form-checkbox>
 			</b-form-group>
 
@@ -68,14 +68,14 @@ export default {
 				{ value: "PLUSQUAMPERFEKT", text: "Plusquamperferkt" },
 			],
 			konjunktiv1: [
-				{ value: "KONJUNKTIV1_PRASENS", text: "Prasens" },
-				{ value: "KONJUNKTIV1_FUTUR1", text: "Futur1" },
-				{ value: "KONJUNKTIV1_PERFEKT", text: "Perfekt" },
+				{ value: "KONJUNKTIV1_PRASENS", text: "Prasens (Konjuktiv1)" },
+				{ value: "KONJUNKTIV1_FUTUR1", text: "Futur1 (Konjuktiv1)" },
+				{ value: "KONJUNKTIV1_PERFEKT", text: "Perfekt (Konjuktiv1)" },
 			],
 			konjunktiv2: [
-				{ value: "KONJUNKTIV2_PRATERITUM", text: "Prateritum" },
-				{ value: "KONJUNKTIV2_FUTUR1", text: "Futur1" },
-				{ value: "KONJUNKTIV2_FUTUR2", text: "Futur2" },
+				{ value: "KONJUNKTIV2_PRATERITUM", text: "Prateritum (Konjuktiv2)" },
+				{ value: "KONJUNKTIV2_FUTUR1", text: "Futur1 (Konjuktiv2)" },
+				{ value: "KONJUNKTIV2_FUTUR2", text: "Futur2 (Konjuktiv2)" },
 			],
 			auxVerb: "SEIN",
 			verbsToBeUsed: "default",
