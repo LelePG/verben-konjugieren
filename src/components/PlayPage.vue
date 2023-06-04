@@ -1,5 +1,5 @@
 <template>
-	<div class="bg-light ">
+	<div class="bg-light mb-auto">
 		<div class="d-flex flex-column align-items-center text-dark pt-2">
 			<h4 class="text-sm-center">O tempo é {{ currentVerbalTense.text }}</h4>
 			<h5>Pontos: {{ getPoints }}</h5>

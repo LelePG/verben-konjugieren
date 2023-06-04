@@ -3,7 +3,7 @@
 		<div class="text-dark d-inline-flex w-100 justify-content-between align-items-center">
 			<h5 class="m-0">{{ verb.name }} - {{ verb.translation }}</h5>
 			<svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-bulb d-float float-right ml-1" 
-				width="25" height="25" viewBox="0 0 24 24" stroke-width="1.5" stroke="white" 
+				width="25" height="25" viewBox="0 0 24 24" stroke-width="1.5" stroke="black" 
 				fill="none" stroke-linecap="round" stroke-linejoin="round" 
 				@click="showAnswer = !showAnswer">
 				<path stroke="none" d="M0 0h24v24H0z" fill="none" />

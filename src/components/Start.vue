@@ -1,7 +1,7 @@
 <template>
-	<div class="bg-light pb-5 d-flex flex-column align-items-center text-dark">
+	<div class="bg-light mb-auto mt-4 d-flex flex-column align-items-center text-dark">
 		<h4 class="pt-4 pb-3 text-center font-weight-bolder">
-			Selecione os tempos verbais que você quer praticar e clique em iniciar!
+			Selecione os tempos verbais, os verbos e clique em iniciar.
 		</h4>
 		<b-form class="pa-2 d-flex justify-content-around w-100 ">
 			<b-form-group class="p-2">
@@ -44,7 +44,7 @@
 		</div>
 		<router-link to="/play" event="" @click.native="loadInfo()"
 			class="w-75 mt-3 d-flex justify-content-center text-decoration-none">
-			<b-button class="bg-secondary w-25 start-button">Iniciar </b-button>
+			<b-button class="bg-secondary w-25 text-white start-button">Iniciar </b-button>
 		</router-link>
 	</div>
 </template>
