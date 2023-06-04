@@ -2,7 +2,7 @@
 	<li class="text-dark d-flex justify-content-between m-1 w-100">
 		<label class="mr-2">{{ person }}</label>
 		<input v-if="showAnswer" type="text" :name="person" :placeholder="answer" disabled :class="inputClasses" />
-		<input v-else :id="id" type="text" :name="person" @focus="changeInputWithFocus" v-model="userInput" :class="inputClasses"
+		<input v-else :id="id" type="text" :name="person" v-model="userInput" :class="inputClasses"
 			@keydown="changeFocusToNextInput($event)"/>
 	</li>
 </template>

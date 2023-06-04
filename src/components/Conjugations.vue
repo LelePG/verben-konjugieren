@@ -94,7 +94,6 @@ export default {
 		changeFocusToNextInput: function (e) {
 			let id = +e.target.id
 			const allInputs = this.$el.querySelectorAll("input");
-			console.log(allInputs)
 			if (e.code === "ArrowDown") {
 				if (id >= 0 && id < allInputs.length - 1) {
 					allInputs[id + 1].focus()
