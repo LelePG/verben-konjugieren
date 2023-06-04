@@ -26,8 +26,7 @@
 			<PersonConjugation id=5 person="sie/Sie" :answer="verbalPeople.sie.conjugation" :showAnswer="showAnswer"
 				:correctConjugation="verifyAnswers" :changeFocusToNextInput="changeFocusToNextInput" />
 		</ul>
-		<b-button v-if="!error" class="bg-primary text-dark" block @click="verificaResposta"> Verificar
-		</b-button>
+		
 	</div>
 </template>
 
@@ -38,13 +37,12 @@ import { mapGetters } from "vuex";
 import PersonConjugation from "./PersonConjugation.vue";
 
 export default {
-	props: ["verbalTense", "verb"],
+	props: ["verbalTense", "verb", "verifyAnswers"],
 	components: {
 		PersonConjugation,
 	},
 	data: function () {
 		return {
-			verifyAnswers: false,
 			showAnswer: false,
 			error: "",
 			verbalPeople: {
@@ -70,9 +68,6 @@ export default {
 		}
 	},
 	methods: {
-		verificaResposta: function () {
-			this.verifyAnswers = !this.verifyAnswers;
-		},
 		updateVerb: function () {
 			try {
 				for (let verbalPerson of Object.values(this.verbalPeople)) {

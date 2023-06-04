@@ -5,7 +5,8 @@
 			<h5>Pontos: {{ getPoints }}</h5>
 		</div>
 		<div class="p-0 m-auto d-flex justify-content-around flex-wrap">
-			<Conjugations v-for="verb in verbs" :key="verb.name" :verb="verb" :verbalTense="currentVerbalTense.value" />
+			<Conjugations v-for="verb in verbs" :key="verb.name" :verb="verb" :verbalTense="currentVerbalTense.value"
+				:verifyAnswers="verifyAnswers" />
 		</div>
 		<div class="text-center">
 			<CharButton char="ß" />
@@ -21,6 +22,8 @@
 			<router-link to="/">
 				<b-button class="bg-primary text-dark mx-2 my-1">Voltar</b-button>
 			</router-link>
+			<b-button class="bg-primary text-dark" @click="verifyAnswers = !verifyAnswers"> Verificar
+			</b-button>
 			<b-button v-if="index > 0" class="bg-primary text-dark mx-2 my-1" @click="decrementIndex">Anterior
 			</b-button>
 			<b-button v-if="index < getAvailableVerbalTenses" class="bg-primary text-dark mx-2 my-1"
@@ -50,7 +53,8 @@ export default {
 		return {
 			verbalTenses: [],
 			verbs: [],
-			currentVerbalTense:{}
+			currentVerbalTense: {},
+			verifyAnswers: false
 		};
 	},
 	methods: {
